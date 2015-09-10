@@ -63,7 +63,7 @@ public class TrivialEdit extends JFrame
 		text.setMargin( new Insets(3,5,0,0) ); // Some space around the text.
 		JScrollPane scroller = new JScrollPane(text);
 		setContentPane(scroller);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setLocation(50,50);
 	}
@@ -81,7 +81,7 @@ public class TrivialEdit extends JFrame
 		text.setMargin( new Insets(3,5,0,0) ); // Some space around the text.
 		JScrollPane scroller = new JScrollPane(text);
 		setContentPane(scroller);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setLocation(50,50);
 		doOpenOnStart(fileName);  

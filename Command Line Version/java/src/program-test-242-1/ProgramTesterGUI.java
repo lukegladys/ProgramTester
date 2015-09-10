@@ -15,7 +15,7 @@ public class ProgramTesterGUI extends javax.swing.JFrame {
         initComponents();
         
         // Window properties
-        //this.setSize(800, 600); // size of the window
+        this.setSize(400, 200); // size of the window
         setLocationRelativeTo(null); // center window
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("IST Program Tester"); // set title
