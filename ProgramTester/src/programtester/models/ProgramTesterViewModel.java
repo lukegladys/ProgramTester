@@ -5,6 +5,9 @@
  */
 package programtester.models;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -17,13 +20,17 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import programtester.controllers.OutputPathChooserController;
+import programtester.controllers.ProgramTesterCntl;
 
 /**
  *
  * @author Luke
  */
 public class ProgramTesterViewModel extends JPanel {
-
+    
+    private ProgramTesterCntl theProgramTesterCntl;
+    private GridBagConstraints c;
+    private JLabel introLabel;
     private JButton previousButton, nextButton;
 
     // <editor-fold defaultstate="collapsed" desc="Step 1: Set files-dir, files-zip and files-test folder locations">
@@ -65,7 +72,7 @@ public class ProgramTesterViewModel extends JPanel {
     private String choosertitle;
     private String outputPath;
     private String outputName;
-
+    
     private JButton browseButton;
     private JTextField fileLocationTestField;
     private JLabel jLabel1;
@@ -74,7 +81,7 @@ public class ProgramTesterViewModel extends JPanel {
     private JMenuBar jMenuBar1;
     private JMenu jMenu1;
     private JMenu jMenu2;
-
+    
     private JRadioButton nameRadioButton;
     private JRadioButton handleRadioButton;
     // </editor-fold>
@@ -90,62 +97,151 @@ public class ProgramTesterViewModel extends JPanel {
     private JMenuItem deleteMenuItem;
     // </editor-fold>
 
-    public ProgramTesterViewModel(int stepInWizard) {
+    public ProgramTesterViewModel(ProgramTesterCntl parentProgramTesterCntl) {
+        this.theProgramTesterCntl = parentProgramTesterCntl;
+        this.setLayout(new GridBagLayout());
         previousButton = new JButton("Back");
         nextButton = new JButton("Next");
+        this.renderComponents(0);
+    }
+    
+    public void renderComponents(int stepInWizard) {
+        this.removeAll();
+        c = new GridBagConstraints();
         switch (stepInWizard) {
+            case 0:
+                introLabel = new JLabel("Welcome to the ProgramTester Wizard!  Press Next to continue...");
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.ipady = 40;      //make this component tall
+                c.insets = new Insets(20, 0, 0, 0);  //top padding
+                c.weightx = 0.0;
+                c.gridwidth = 3;
+                c.gridx = 0;
+                c.gridy = 0;
+                this.add(introLabel, c);
+                
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.ipady = 0;       //reset to default
+                c.weighty = 1.0;   //request any extra vertical space
+                c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+                c.insets = new Insets(10, 0, 0, 0);  //top padding
+                c.gridx = 2;       //aligned with button 2
+                c.gridwidth = 2;   //2 columns wide
+                c.gridy = 1;       //third row
+
+                nextButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    theProgramTesterCntl.step(1);
+                });
+                
+                this.add(nextButton, c);
+                
+                break;
             case 1:
+                
                 unzippedFileNames = new JTextArea(2, 20);
                 unzippedFileNames.setEditable(false);
                 unzippedFiles = new JFileChooser();
+                unzippedFiles.setMultiSelectionEnabled(true);
                 unzippedFilesButton = new JButton("Select...");
-
+                
                 unzippedFilesButton.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         unzippedFilesButtonActionPerformed(evt);
                     }
                 });
-
-                unzippedFiles.setMultiSelectionEnabled(true);
+                
                 selectedUnzippedFiles = unzippedFiles.getSelectedFiles();
+                
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.weightx = 2;
+                c.weighty = 0.5;
+                c.gridwidth = 3;
+                c.gridx = 0;
+                c.gridy = 3;
+                this.add(unzippedFileNames, c);
+                
                 zippedFileNames = new JTextArea(2, 20);
                 zippedFileNames.setEditable(false);
                 zippedFiles = new JFileChooser();
+                zippedFiles.setMultiSelectionEnabled(true);
                 zippedFilesButton = new JButton("Select...");
-
+                
                 zippedFilesButton.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         zippedFilesButtonActionPerformed(evt);
                     }
                 });
-
-                zippedFiles.setMultiSelectionEnabled(true);
+                
                 selectedZippedFiles = zippedFiles.getSelectedFiles();
+                
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.weightx = 2;
+                c.weighty = 0.5;
+                c.gridwidth = 3;
+                c.gridx = 0;
+                c.gridy = 4;
+                this.add(zippedFileNames, c);
+                
                 testFileNames = new JTextArea(2, 20);
                 testFileNames.setEditable(false);
                 testFiles = new JFileChooser();
+                testFiles.setMultiSelectionEnabled(true);
                 testFilesButton = new JButton("Select...");
-
+                
                 testFilesButton.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         testFilesButtonActionPerformed(evt);
                     }
                 });
-
-                testFiles.setMultiSelectionEnabled(true);
+                
                 selectedTestFiles = testFiles.getSelectedFiles();
-
-                //TODO SET PANEL LAYOUTS HERE*************************************
-                break;
                 
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.weightx = 2;
+                c.weighty = 0.5;
+                c.gridwidth = 3;
+                c.gridx = 0;
+                c.gridy = 5;
+                this.add(testFileNames, c);
+                
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.ipady = 0;       //reset to default
+                c.weighty = 1.0;   //request any extra vertical space
+                c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+                c.insets = new Insets(10, 0, 0, 0);  //top padding
+                c.gridx = 4; 
+                c.gridy = 6;
+
+                previousButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    theProgramTesterCntl.step(0);
+                });
+                
+                this.add(previousButton, c);
+                
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.ipady = 0;       //reset to default
+                c.weighty = 1.0;   //request any extra vertical space
+                c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+                c.insets = new Insets(10, 0, 0, 0);  //top padding
+                c.gridx = 5;       //aligned with button 2
+                c.gridy = 6;       //third row
+
+                nextButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    theProgramTesterCntl.step(2);
+                });
+                
+                this.add(nextButton, c);
+
+                break;
+            
             case 2:
-
-                break;
                 
+                break;
+            
             case 3:
-
-                break;
                 
+                break;
+            
             case 4:
                 submitButton = new JButton();
                 fileNameLabel = new JLabel();
@@ -155,22 +251,22 @@ public class ProgramTesterViewModel extends JPanel {
                 cmdArgsField = new JTextField();
                 scannerInputField = new JTextField();
                 noScannerRadioButton = new JRadioButton();
-
+                
                 submitButton.setText("Next");
                 submitButton.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         submitButtonActionPerformed(evt);
                     }
                 });
-
+                
                 fileNameLabel.setText("jLabel1");
-
+                
                 runNumberLabel.setText("jLabel2");
-
+                
                 jLabel3.setText("Command-Line Args:");
-
+                
                 jLabel4.setText("Scanner Input:");
-
+                
                 noScannerRadioButton.setText("None");
                 noScannerRadioButton.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,7 +276,7 @@ public class ProgramTesterViewModel extends JPanel {
 
                 //TODO SET PANEL LAYOUTS HERE*************************************
                 break;
-                
+            
             case 5:
                 browseButton.setText("Browse");
                 browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -188,33 +284,33 @@ public class ProgramTesterViewModel extends JPanel {
                         browseButtonActionPerformed(evt);
                     }
                 });
-
+                
                 fileLocationTestField.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         fileLocationTestFieldActionPerformed(evt);
                     }
                 });
-
+                
                 jLabel1.setText("Choose an output location:");
-
+                
                 outputNameField.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         outputNameFieldActionPerformed(evt);
                     }
                 });
-
+                
                 jLabel2.setText("Choose an output file name:");
-
+                
                 nextButton.setText("Next");
                 nextButton.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         nextButtonActionPerformed(evt);
                     }
                 });
-
+                
                 jMenu1.setText("File");
                 jMenuBar1.add(jMenu1);
-
+                
                 jMenu2.setText("Edit");
                 jMenuBar1.add(jMenu2);
 
@@ -222,6 +318,8 @@ public class ProgramTesterViewModel extends JPanel {
                 //TODO SET PANEL LAYOUTS HERE*************************************
                 break;
         }
+        
+        this.updateUI();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Step 1 ActionListeners">
@@ -231,14 +329,14 @@ public class ProgramTesterViewModel extends JPanel {
             selectedUnzippedFiles = unzippedFiles.getSelectedFiles();
         }
     }
-
+    
     private void zippedFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = zippedFiles.showOpenDialog(ProgramTesterViewModel.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             selectedZippedFiles = zippedFiles.getSelectedFiles();
         }
     }
-
+    
     private void testFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = testFiles.showOpenDialog(ProgramTesterViewModel.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -253,9 +351,9 @@ public class ProgramTesterViewModel extends JPanel {
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 4 ActionListeners">
     private void noScannerRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
+        
     }
-
+    
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
         Run.getRunList().get(runNumber).setCmdArgs(cmdArgsField.getText());
         if (noScannerRadioButton.isSelected()) {
@@ -276,7 +374,6 @@ public class ProgramTesterViewModel extends JPanel {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 5 ActionListeners">
-
     private void fileLocationTestFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileLocationTestFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fileLocationTestFieldActionPerformed
@@ -289,13 +386,13 @@ public class ProgramTesterViewModel extends JPanel {
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         // disable the "All files" option.
         chooser.setAcceptAllFileFilterUsed(false);
-
+        
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
             System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
             outputPath = chooser.getSelectedFile().toString();
             this.fileLocationTestField.setText(outputPath);
-
+            
         } else {
             System.out.println("No Selection ");
         }
