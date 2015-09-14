@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import programtester.controllers.OutputPathChooserController;
@@ -35,6 +36,7 @@ public class ProgramTesterViewModel extends JPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Step 1: Set files-dir, files-zip and files-test folder locations">
     private JTextArea unzippedFileNames;
+    private JScrollPane unzippedScrollPane;
     private JFileChooser unzippedFiles;
     private JButton unzippedFilesButton;
     private File[] selectedUnzippedFiles;
@@ -138,7 +140,7 @@ public class ProgramTesterViewModel extends JPanel {
                 break;
             case 1:
                 
-                unzippedFileNames = new JTextArea(2, 20);
+                unzippedFileNames = new JTextArea("Unzipped Files", 2, 20);
                 unzippedFileNames.setEditable(false);
                 unzippedFiles = new JFileChooser();
                 unzippedFiles.setMultiSelectionEnabled(true);
@@ -149,9 +151,7 @@ public class ProgramTesterViewModel extends JPanel {
                         unzippedFilesButtonActionPerformed(evt);
                     }
                 });
-                
-                selectedUnzippedFiles = unzippedFiles.getSelectedFiles();
-                
+                        
                 c.fill = GridBagConstraints.HORIZONTAL;
                 c.weightx = 2;
                 c.weighty = 0.5;
@@ -160,7 +160,15 @@ public class ProgramTesterViewModel extends JPanel {
                 c.gridy = 3;
                 this.add(unzippedFileNames, c);
                 
-                zippedFileNames = new JTextArea(2, 20);
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.weightx = 2;
+                c.weighty = 0.5;
+                c.gridwidth = 1;
+                c.gridx = 4;
+                c.gridy = 3;
+                this.add(unzippedFilesButton, c);
+                
+                zippedFileNames = new JTextArea("Zipped Files", 2, 20);
                 zippedFileNames.setEditable(false);
                 zippedFiles = new JFileChooser();
                 zippedFiles.setMultiSelectionEnabled(true);
@@ -172,8 +180,6 @@ public class ProgramTesterViewModel extends JPanel {
                     }
                 });
                 
-                selectedZippedFiles = zippedFiles.getSelectedFiles();
-                
                 c.fill = GridBagConstraints.HORIZONTAL;
                 c.weightx = 2;
                 c.weighty = 0.5;
@@ -181,6 +187,14 @@ public class ProgramTesterViewModel extends JPanel {
                 c.gridx = 0;
                 c.gridy = 4;
                 this.add(zippedFileNames, c);
+                
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.weightx = 2;
+                c.weighty = 0.5;
+                c.gridwidth = 1;
+                c.gridx = 4;
+                c.gridy = 4;
+                this.add(zippedFilesButton, c);
                 
                 testFileNames = new JTextArea(2, 20);
                 testFileNames.setEditable(false);
@@ -209,6 +223,7 @@ public class ProgramTesterViewModel extends JPanel {
                 c.weighty = 1.0;   //request any extra vertical space
                 c.anchor = GridBagConstraints.PAGE_END; //bottom of space
                 c.insets = new Insets(10, 0, 0, 0);  //top padding
+                c.gridwidth = 1;
                 c.gridx = 4; 
                 c.gridy = 6;
 
@@ -227,7 +242,8 @@ public class ProgramTesterViewModel extends JPanel {
                 c.gridy = 6;       //third row
 
                 nextButton.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    theProgramTesterCntl.step(2);
+                    //TODO CHANGE WHEN NEW STEPS COME IN
+                    theProgramTesterCntl.step(4);
                 });
                 
                 this.add(nextButton, c);
@@ -327,6 +343,12 @@ public class ProgramTesterViewModel extends JPanel {
         int returnVal = unzippedFiles.showOpenDialog(ProgramTesterViewModel.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             selectedUnzippedFiles = unzippedFiles.getSelectedFiles();
+            String filelist = "";
+            for(int i=0 ; i<selectedUnzippedFiles.length ; i++)
+            {
+                filelist += selectedUnzippedFiles[i].getName() + ", ";
+            }
+            ProgramTesterViewModel.this.unzippedFileNames.setText(filelist);
         }
     }
     
