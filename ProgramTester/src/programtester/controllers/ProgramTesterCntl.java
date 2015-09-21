@@ -15,18 +15,25 @@ import programtester.views.ProgramTesterUI;
 public class ProgramTesterCntl {
     
     ProgramTesterViewModel currentViewModel;
+    ProgramTesterUI theProgramTesterUI;
     
     public ProgramTesterCntl(){
-        this.showProgramTesterUI();
+        this.startProgramTesterWizard();
     }
     
-    public void showProgramTesterUI(){
-        ProgramTesterUI theProgramTesterUI = new ProgramTesterUI(this);
+    public void startProgramTesterWizard(){
+        currentViewModel = new ProgramTesterViewModel(this);
+        theProgramTesterUI = new ProgramTesterUI(this);
         theProgramTesterUI.setVisible(true);
     }
     
     public ProgramTesterViewModel getCurrentViewModel(){
         return currentViewModel;
+    }
+    
+    public void step(int stepNumber){
+        currentViewModel.renderComponents(stepNumber);
+        theProgramTesterUI.initComponents(currentViewModel);
     }
     
 }

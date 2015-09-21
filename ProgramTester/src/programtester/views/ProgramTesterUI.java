@@ -13,15 +13,20 @@ import programtester.models.ProgramTesterViewModel;
  *
  * @author Luke
  */
-public class ProgramTesterUI extends JFrame{
-    
+public class ProgramTesterUI extends JFrame {
+
     ProgramTesterCntl theProgramTesterCntl;
-    
-    public ProgramTesterUI(ProgramTesterCntl parentProgramTesterCntl){
-        theProgramTesterCntl = parentProgramTesterCntl; 
-        initComponents(parentProgramTesterCntl.getCurrentViewModel()); 
+
+    public ProgramTesterUI(ProgramTesterCntl parentProgramTesterCntl) {
+        theProgramTesterCntl = parentProgramTesterCntl;
+        initComponents(parentProgramTesterCntl.getCurrentViewModel());
+
+        this.setSize(650, 500);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
-    public void initComponents(ProgramTesterViewModel theProgramTesterViewModel){
-        
+
+    public void initComponents(ProgramTesterViewModel theProgramTesterViewModel) {
+        this.getContentPane().add(theProgramTesterViewModel);
     }
 }
