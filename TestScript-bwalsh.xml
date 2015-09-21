@@ -1,0 +1,170 @@
+<project name="DecisionTester" basedir="." default="run-all">
+
+    <property file="build.properties"/>
+    
+    <path id="classpath">
+        <fileset dir="${libDirectory}" includes="**/*.jar"/>
+    </path>
+    
+    
+    <!-- The clean target deletes the bin and dist directories (permitting
+     you to start from scratch. -->
+    
+    <target name="clean">
+        <delete dir="${binDirectory}"/>
+        <delete dir="${distDirectory}"/>
+    </target>
+    
+    
+    
+    <!-- The compile-all target creates the bin directory, copies any
+     .properties files from the src directory into the bin directory,
+     and compiles the code in the src directory while simultaneously
+     placing the generated .class files into he bin directory. -->
+    
+    <target name="compile-all" depends="clean">
+        <mkdir dir="${binDirectory}"/>
+        <copy todir="${binDirectory}">
+            <fileset dir="${srcDirectory}" includes="**/*.properties"/>
+        </copy>
+        <javac srcdir="${srcDirectory}"
+            destdir="${binDirectory}"
+            classpathref="classpath"
+            includeAntRuntime="false"
+            fork="true"
+        />
+    </target>
+    
+    
+    
+    <!-- The compile target copies any .properties files from the src
+     directory into the bin directory, compiles any .java files that are
+     more recently changed than the existing .class files in the bin
+     directory. -->
+    
+    <target name="compile">
+        <copy todir="${binDirectory}">
+            <fileset dir="${srcDirectory}" includes="**/*.properties"/>
+        </copy>
+        <javac srcdir="${srcDirectory}"
+            destdir="${binDirectory}"
+            classpathref="classpath"
+            includeAntRuntime="false"
+            fork="true"
+        />
+    </target>
+    
+    
+    
+    <!-- The build-all target creates the dist directory and jars
+     the files in the bin directory, placing the resulting .jar file
+     in the dist directory. -->
+    
+    <target name="build-all" depends="compile-all">
+        <mkdir dir="${distDirectory}"/>
+        <jar destfile="${distDirectory}/${appName}.jar"
+            basedir="${binDirectory}">
+            <zipgroupfileset dir="${libDirectory}" includes="**/*.jar" />
+            <manifest>
+                <attribute name="Main-Class"
+                    value="${mainClass}"/>
+            </manifest>
+        </jar>
+    </target>
+    
+    
+    
+    <!-- The build target jars the files in the bin directory,
+     placing the resulting .jar file in the dist directory. -->
+    
+    <target name="build" depends="compile">
+        <jar destfile="${distDirectory}/${appName}.jar"
+            basedir="${binDirectory}">
+            <zipgroupfileset dir="${libDirectory}" includes="**/*.jar" />
+            <manifest>
+                <attribute name="Main-Class"
+                    value="${mainClass}"/>
+            </manifest>
+        </jar>
+    </target>
+    
+    
+    
+    <!-- The build-ind target jars the files in the bin directory,
+     without recompiling, placing the resulting .jar file in the
+     dist directory. -->
+    
+    <target name="build-ind">
+        <jar destfile="${distDirectory}/${appName}.jar"
+            basedir="${binDirectory}">
+            <zipgroupfileset dir="${libDirectory}" includes="**/*.jar" />
+            <manifest>
+                <attribute name="Main-Class"
+                    value="${mainClass}"/>
+            </manifest>
+        </jar>
+    </target>
+    
+    
+    
+    <!-- The run-all target runs the .jar file created by the
+     build-all target, utilizing the class as the executable class. -->
+    
+    <target name="run-all" depends="build-all">
+        <java jar="${distDirectory}/${appName}.jar"
+            fork="true"
+            >
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${distDirectory}/${appName}.jar"/>
+            </classpath>
+        </java>
+    </target>
+    
+    
+    
+    <!-- The run target runs the .jar file created by the
+     build target, utilizing the class as the executable class. -->
+    
+    <target name="run" depends="build">
+        <java jar="${distDirectory}/${appName}.jar"
+            fork="true"
+            >
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${distDirectory}/${appName}.jar"/>
+            </classpath>
+        </java>
+    </target>
+    
+    
+    
+    <!-- The run-ind target runs the .jar file in the dist
+     directory, utilizing the class as the executable class. -->
+    
+    <target name="run-ind">
+        <java jar="${distDirectory}/${appName}.jar"
+            fork="true"
+            >
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${distDirectory}/${appName}.jar"/>
+            </classpath>
+        </java>
+    </target>
+    
+    
+    
+    <!-- The doc target has no dependencies, creates the javadocs
+     and places them in the doc directory. -->
+    
+    <target name="doc">
+        <javadoc sourcepath="${srcDirectory}"
+            destdir="${docDirectory}"
+            author="true"
+            version="true">
+        </javadoc>
+    </target>
+    
+    
+</project>
