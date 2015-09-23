@@ -32,8 +32,7 @@ public class ProgramTesterCntl {
     }
     
     public void step(int stepNumber){
-        currentViewModel.renderComponents(stepNumber);
-        theProgramTesterUI.initComponents(currentViewModel);
+        theProgramTesterUI.renderComponents(stepNumber);
     }
     
 }
