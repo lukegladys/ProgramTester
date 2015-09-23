@@ -68,12 +68,12 @@ public class ProgramTesterUI extends JFrame{
          field1.setBounds(40, 15, 400, 50);
          panel1.add(field1);
          
-         JFileChooser fileField2 = new JFileChooser();
-         fileField2.setBounds(100, 270, 260, 50);
+         JTextField fileField2 = new JTextField();
+         fileField2.setBounds(110, 280, 255, 30);
          panel1.add(fileField2);
          
          JTextField field2 = new JTextField();
-         field2.setBounds(100, 240, 400, 30);
+         field2.setBounds(110, 240, 255, 30);
          panel1.add(field2);
          
          JLabel label1 = new JLabel();
@@ -88,16 +88,16 @@ public class ProgramTesterUI extends JFrame{
          
          JLabel label3 = new JLabel();
          label3.setBounds(40, 25, 100, 20);
-         label3.setText("Look In:");
+         //label3.setText("Look In:");
          panel1.add(label3);
          
          JButton oButton = new JButton();
-         oButton.setBounds(360, 300, 75, 25);
+         oButton.setBounds(400, 300, 75, 25);
          oButton.setText("Open");
          panel1.add(oButton);
          
          JButton cButton = new JButton();
-         cButton.setBounds(430 ,300 , 75, 25);
+         cButton.setBounds(475 ,300 , 75, 25);
          cButton.setText("Cancel");
          panel1.add(cButton);
          
