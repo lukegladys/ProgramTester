@@ -6,6 +6,7 @@
  */
 package programtester.models;
 
+
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -180,6 +181,7 @@ public class ProgramTesterViewModel extends JPanel {
                 });
 
                 //TODO SET PANEL LAYOUTS HERE*************************************
+                
                 break;
                 
             case 5:
@@ -223,6 +225,10 @@ public class ProgramTesterViewModel extends JPanel {
                 //TODO SET PANEL LAYOUTS HERE*************************************
                 break;
         }
+    }
+
+    public ProgramTesterViewModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // <editor-fold defaultstate="collapsed" desc="Step 1 ActionListeners">
