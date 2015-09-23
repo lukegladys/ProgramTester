@@ -140,15 +140,15 @@ public class ProgramTesterUI extends JFrame{
              browse.setText("Browse");
              panel3.add(browse);
              
-             JButton nextButton = new JButton();
-             nextButton.setBounds(375,300,100,30);
-             nextButton.setText("Next");
-             panel3.add(nextButton);
-             
              JButton backButton = new JButton();
-             backButton.setBounds(475, 300, 100, 30);
+             backButton.setBounds(375,300,100,30);
              backButton.setText("Back");
              panel3.add(backButton);
+             
+             JButton nextButton = new JButton();
+             nextButton.setBounds(475, 300, 100, 30);
+             nextButton.setText("Next");
+             panel3.add(nextButton);
              
              
              
@@ -188,12 +188,12 @@ public class ProgramTesterUI extends JFrame{
            
            JButton button = new JButton();
            button.setBounds(375, 300, 100, 30);
-           button.setText("Next");
+           button.setText("Back");
            panel4.add(button);
            
            JButton button2 = new JButton();
            button2.setBounds(475, 300, 100, 30);
-           button2.setText("Back");
+           button2.setText("Next");
            panel4.add(button2);
            
         }
