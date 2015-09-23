@@ -36,7 +36,10 @@ public class ProgramTesterUI extends JFrame{
          setTitle("Program Tester");
          setSize(600, 400);
          setBackground(Color.gray);
+         setResizable(false);
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         setLocationRelativeTo(null);
+         
          
         JPanel topPanel = new JPanel();
         topPanel.setLayout (new BorderLayout());
