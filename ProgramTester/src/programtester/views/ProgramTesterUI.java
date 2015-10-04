@@ -59,11 +59,11 @@ public class ProgramTesterUI extends JFrame {
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 4: Specify scanner and cmd inputs">
     private JButton submitButton;
-    private JLabel fileNameLabel;
-    private JLabel runNumberLabel;
-    private JTextField cmdArgsField;
-    private JTextField scannerInputField;
-    private JRadioButton noScannerRadioButton;
+    private JLabel fileNameLabel = new JLabel();
+    private JLabel runNumberLabel = new JLabel();
+    private JTextField cmdArgsField = new JTextField();
+    private JTextField scannerInputField = new JTextField();
+    private JRadioButton noScannerRadioButton = new JRadioButton();
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 5: Specify output folder and output file name. Specify whether student name or student handle should be used in the output file">
     OutputPathChooserController theOutputPathChooserController;

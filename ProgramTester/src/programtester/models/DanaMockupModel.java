@@ -98,7 +98,7 @@ public class DanaMockupModel implements ActionListener
             for (int i = 0; i < runs1; i++)
             {
                 Run r = new Run(fileName1);
-                //runList.add(r);
+                runList.add(r);
             }
         }
         else
@@ -110,7 +110,7 @@ public class DanaMockupModel implements ActionListener
             for (int i = 0; i < runs2; i++)
             {
                 Run r = new Run(fileName2);
-                //runList.add(r);
+                runList.add(r);
             }
         }
         else
@@ -119,7 +119,7 @@ public class DanaMockupModel implements ActionListener
         
         // Debugging - print the content of the run list
         System.out.println("Content of runList: ");
-        for (Run r : Run.getRunList())
+        for (Run r : runList)
         {
             System.out.println(r.getFileName());
         }
