@@ -58,12 +58,9 @@ public class ProgramTesterUI extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Step 3: Input names of files and the number of runs for each file">
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 4: Specify scanner and cmd inputs">
-    private int runNumber;
     private JButton submitButton;
     private JLabel fileNameLabel;
     private JLabel runNumberLabel;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
     private JTextField cmdArgsField;
     private JTextField scannerInputField;
     private JRadioButton noScannerRadioButton;
@@ -262,10 +259,9 @@ public class ProgramTesterUI extends JFrame {
             case 4:
                 mainPanel.setLayout(null);
 
-                JLabel factorial = new JLabel();
-                factorial.setBounds(30, 30, 100, 20);
-                factorial.setText("Factorial");
-                mainPanel.add(factorial);
+                fileNameLabel.setBounds(30, 30, 100, 20);
+                fileNameLabel.setText(Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).getFileName());
+                mainPanel.add(fileNameLabel);
 
                 JLabel cmdArgs = new JLabel();
                 cmdArgs.setBounds(100, 125, 150, 20);
@@ -274,28 +270,39 @@ public class ProgramTesterUI extends JFrame {
 
                 JLabel scnrInput = new JLabel();
                 scnrInput.setBounds(100, 150, 150, 20);
-                scnrInput.setText("Scanner Input");
+                scnrInput.setText("Scanner Input: ");
                 mainPanel.add(scnrInput);
 
-                JTextField textField1 = new JTextField();
-                textField1.setBounds(250, 125, 200, 20);
-                mainPanel.add(textField1);
+                cmdArgsField.setBounds(250, 125, 200, 20);
+                mainPanel.add(cmdArgsField);
 
-                JTextField textField2 = new JTextField();
-                textField2.setBounds(200, 150, 250, 20);
-                mainPanel.add(textField2);
+                scannerInputField.setBounds(200, 150, 250, 20);
+                mainPanel.add(scannerInputField);
 
-                JCheckBox checkBox = new JCheckBox();
-                checkBox.setBounds(200, 175, 100, 30);
-                checkBox.setText("None");
-                mainPanel.add(checkBox);
+                noScannerRadioButton.setBounds(200, 175, 100, 30);
+                noScannerRadioButton.setText("None");
+                mainPanel.add(noScannerRadioButton);
 
                 previousButton.addActionListener((java.awt.event.ActionEvent evt) -> {
                     theProgramTesterCntl.step(3);
                 });
 
                 nextButton.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    theProgramTesterCntl.step(5);
+                    Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setCmdArgs(cmdArgsField.getText());
+                    if (noScannerRadioButton.isSelected()) {
+                        Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setScannerArgs("None");
+                    } else {
+                        Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setScannerArgs(scannerInputField.getText());
+                    }
+
+                    if (this.theProgramTesterCntl.getCurrentViewModel().getRunNumber() + 1 < Run.getRunList().size()) {
+                     this.theProgramTesterCntl.getCurrentViewModel().setRunNumber(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()+1);
+                     theProgramTesterCntl.step(4);
+
+                     } else {
+                     this.theProgramTesterCntl.getCurrentViewModel().printFiles();
+                     theProgramTesterCntl.step(5);
+                     }
                 });
                 break;
             // </editor-fold>
@@ -390,27 +397,6 @@ public class ProgramTesterUI extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Step 3 ActionListeners">
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 4 ActionListeners">
-    private void noScannerRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
-    }
-
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        Run.getRunList().get(runNumber).setCmdArgs(cmdArgsField.getText());
-        if (noScannerRadioButton.isSelected()) {
-            Run.getRunList().get(runNumber).setScannerArgs("None");
-        } else {
-            Run.getRunList().get(runNumber).setScannerArgs(scannerInputField.getText());
-        }
-
-        //TODO REFRESH FRAME WITH CORRECT INFO HERE
-        /*if (runNumber + 1 < Run.getRunList().size()) {
-         ScannerInputs newScannerInput = new ScannerInputs(Run.getRunList().get(runNumber + 1).getFileName(), runNumber + 1, Run.getRunList().size(), theParentInputsCntl);
-
-         } else {
-         theParentInputsCntl.printFiles();
-         }
-         this.dispose();*/
-    }
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 5 ActionListeners">

@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
+import programtester.models.Run;
 
 /**
  *
@@ -87,7 +88,7 @@ public class DanaMockupModel implements ActionListener
     
     public void buildRunList()
     {
-        runList = new ArrayList();
+        //runList = new ArrayList();
         fileName1 = fileNameField1.getText();
         fileName2 = fileNameField2.getText();
         
@@ -97,7 +98,7 @@ public class DanaMockupModel implements ActionListener
             for (int i = 0; i < runs1; i++)
             {
                 Run r = new Run(fileName1);
-                runList.add(r);
+                //runList.add(r);
             }
         }
         else
@@ -109,7 +110,7 @@ public class DanaMockupModel implements ActionListener
             for (int i = 0; i < runs2; i++)
             {
                 Run r = new Run(fileName2);
-                runList.add(r);
+                //runList.add(r);
             }
         }
         else
@@ -118,7 +119,7 @@ public class DanaMockupModel implements ActionListener
         
         // Debugging - print the content of the run list
         System.out.println("Content of runList: ");
-        for (Run r : runList)
+        for (Run r : Run.getRunList())
         {
             System.out.println(r.getFileName());
         }

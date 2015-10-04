@@ -6,8 +6,12 @@
 package programtester.models;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import programtester.controllers.OutputPathChooserController;
 import programtester.controllers.ProgramTesterCntl;
+import programtester.models.Run;
 
 /**
  *
@@ -30,7 +34,7 @@ public class ProgramTesterViewModel{
     // <editor-fold defaultstate="collapsed" desc="Step 3: Input names of files and the number of runs for each file">
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 4: Specify scanner and cmd inputs">
-    private int runNumber;
+    private int runNumber = 0;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 5: Specify output folder and output file name. Specify whether student name or student handle should be used in the output file">
     OutputPathChooserController theOutputPathChooserController;
@@ -38,6 +42,36 @@ public class ProgramTesterViewModel{
     // <editor-fold defaultstate="collapsed" desc="Step 6: Run and open the output file">
     // </editor-fold>
 
+    public int getRunNumber(){
+        return runNumber;
+    }
+    public void setRunNumber(int runNumber){
+        this.runNumber = runNumber;
+    }
+    
+    public void printFiles(){
+        try{
+            PrintWriter pw = new PrintWriter(new FileWriter("args.txt"));
+
+            for(int i = 0; i < Run.getRunList().size(); i++){
+                pw.println(Run.getRunList().get(i).getFileName() + " " + Run.getRunList().get(i).getCmdArgs());
+            }
+
+            pw.close();
+
+            PrintWriter pwt = new PrintWriter(new FileWriter("TestInput.txt"));
+
+            for(int i = 0; i < Run.getRunList().size(); i++){
+                pwt.println(Run.getRunList().get(i).getScannerArgs());
+            }
+
+            pwt.close();
+        }catch(IOException ex)
+            {
+            ex.printStackTrace();
+            }
+    }
+    
     public ProgramTesterViewModel(ProgramTesterCntl parentProgramTesterCntl) {
         this.theProgramTesterCntl = parentProgramTesterCntl;
     }
