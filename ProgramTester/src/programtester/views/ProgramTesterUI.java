@@ -221,30 +221,23 @@ public class ProgramTesterUI extends JFrame {
             case 3:
                 mainPanel.setLayout(null);
 
-                JTextField jField = new JTextField();
-                jField.setBounds(30, 70, 300, 30);
-                mainPanel.add(jField);
+                JTextField fileNameField1 = new JTextField();
+                fileNameField1.setBounds(100, 200, 200, 25);
+                mainPanel.add(fileNameField1);
+                
+                JTextField fileNameField2 = new JTextField();
+                fileNameField2.setBounds(100, 250, 200, 25);
+                mainPanel.add(fileNameField2);
 
-                JLabel label4 = new JLabel();
-                label4.setBounds(30, 40, 100, 30);
-                label4.setText("Output");
-                mainPanel.add(label4);
-
-                JLabel label5 = new JLabel();
-                label5.setBounds(30, 175, 200, 30);
-                label5.setText("Number of Runs:");
-                mainPanel.add(label5);
+                JLabel numberOfRunsPrompt = new JLabel("Number of runs");
+                numberOfRunsPrompt.setBounds(350, 150, 250, 50);
+                mainPanel.add(numberOfRunsPrompt);
 
                 String[] numbers = {"5", "4", "3", "2", "1", "0"};
                 JComboBox box1 = new JComboBox(numbers);
                 box1.setSelectedIndex(5);
-                box1.setBounds(150, 175, 100, 30);
+                box1.setBounds(350, 200, 150, 25);
                 mainPanel.add(box1);
-
-                JButton browse = new JButton();
-                browse.setBounds(340, 70, 100, 30);
-                browse.setText("Browse");
-                mainPanel.add(browse);
 
                 previousButton.addActionListener((java.awt.event.ActionEvent evt) -> {
                     theProgramTesterCntl.step(1);
@@ -395,6 +388,7 @@ public class ProgramTesterUI extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Step 2 ActionListeners">
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 3 ActionListeners">
+    
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 4 ActionListeners">
 
