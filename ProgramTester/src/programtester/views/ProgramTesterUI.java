@@ -277,8 +277,10 @@ public class ProgramTesterUI extends JFrame
                     // Create runs from user input
                     String fileName1 = fileNameField1.getText();
                     String fileName2 = fileNameField2.getText();
-                    int runs1 = (int) box1.getSelectedItem();
-                    int runs2 = (int) box2.getSelectedItem();
+                    String run1 = (String) box1.getSelectedItem();
+                    int runs1 = Integer.parseInt(run1);
+                    String run2 = (String) box2.getSelectedItem();
+                    int runs2 = Integer.parseInt(run2);
 
                     // Create/add runs for the first file
                     if (!fileName1.equals(""))
