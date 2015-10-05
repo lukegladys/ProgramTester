@@ -238,6 +238,11 @@ public class ProgramTesterUI extends JFrame {
                 box1.setSelectedIndex(5);
                 box1.setBounds(350, 200, 150, 25);
                 mainPanel.add(box1);
+                
+                JComboBox box2 = new JComboBox(numbers);
+                box2.setSelectedIndex(5);
+                box2.setBounds(350, 250, 150, 25);
+                mainPanel.add(box2);
 
                 previousButton.addActionListener((java.awt.event.ActionEvent evt) -> {
                     theProgramTesterCntl.step(1);
