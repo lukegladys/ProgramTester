@@ -31,8 +31,7 @@ import programtester.models.Run;
  *
  * @author Luke
  */
-public class ProgramTesterUI extends JFrame
-{
+public class ProgramTesterUI extends JFrame {
 
     ProgramTesterCntl theProgramTesterCntl;
     private JPanel mainPanel, navPanel;
@@ -102,8 +101,7 @@ public class ProgramTesterUI extends JFrame
     private JMenuItem deleteMenuItem;
     // </editor-fold>
 
-    public ProgramTesterUI(ProgramTesterCntl parentProgramTesterCntl)
-    {
+    public ProgramTesterUI(ProgramTesterCntl parentProgramTesterCntl) {
         theProgramTesterCntl = parentProgramTesterCntl;
 
         this.theProgramTesterCntl = parentProgramTesterCntl;
@@ -126,30 +124,28 @@ public class ProgramTesterUI extends JFrame
         this.setLocationRelativeTo(null);
     }
 
-    public void renderComponents(int stepInWizard)
-    {
+    public void renderComponents(int stepInWizard) {
         mainPanel.removeAll();
 
-        for (ActionListener a : previousButton.getActionListeners())
-        {
+        for (ActionListener a : previousButton.getActionListeners()) {
             previousButton.removeActionListener(a);
         }
-        for (ActionListener a : nextButton.getActionListeners())
-        {
+        for (ActionListener a : nextButton.getActionListeners()) {
             nextButton.removeActionListener(a);
         }
 
-        switch (stepInWizard)
-        {
+        switch (stepInWizard) {
             case 0:
                 this.setTitle("Program Tester");
                 mainPanel.setLayout(new GridLayout(1, 1, 60, 60));
                 introLabel = new JLabel("Welcome to the ProgramTester Wizard!  Press Next to continue...");
                 mainPanel.add(introLabel);
 
-                nextButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    theProgramTesterCntl.step(1);
+                nextButton.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        theProgramTesterCntl.step(1);
+                    }
                 });
 
                 break;
@@ -162,10 +158,8 @@ public class ProgramTesterUI extends JFrame
                 unzippedFileNames.setEditable(false);
                 unzippedFileNames.setPreferredSize(new Dimension(2, 20));
                 unzippedFileNames.setLineWrap(true);
-                if (this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles() != null)
-                {
-                    for (int i = 0; i < this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles().length; i++)
-                    {
+                if (this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles() != null) {
+                    for (int i = 0; i < this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles().length; i++) {
                         unzippedFileNames.append(this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles()[i].getName() + ", ");
                     }
                 }
@@ -173,10 +167,8 @@ public class ProgramTesterUI extends JFrame
                 unzippedFiles.setMultiSelectionEnabled(true);
                 unzippedFilesButton = new JButton("Select...");
 
-                unzippedFilesButton.addActionListener(new java.awt.event.ActionListener()
-                {
-                    public void actionPerformed(java.awt.event.ActionEvent evt)
-                    {
+                unzippedFilesButton.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
                         unzippedFilesButtonActionPerformed(evt);
                     }
                 });
@@ -192,10 +184,8 @@ public class ProgramTesterUI extends JFrame
                 zippedFiles.setMultiSelectionEnabled(true);
                 zippedFilesButton = new JButton("Select...");
 
-                zippedFilesButton.addActionListener(new java.awt.event.ActionListener()
-                {
-                    public void actionPerformed(java.awt.event.ActionEvent evt)
-                    {
+                zippedFilesButton.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
                         zippedFilesButtonActionPerformed(evt);
                     }
                 });
@@ -211,10 +201,8 @@ public class ProgramTesterUI extends JFrame
                 testFiles.setMultiSelectionEnabled(true);
                 testFilesButton = new JButton("Select...");
 
-                testFilesButton.addActionListener(new java.awt.event.ActionListener()
-                {
-                    public void actionPerformed(java.awt.event.ActionEvent evt)
-                    {
+                testFilesButton.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
                         testFilesButtonActionPerformed(evt);
                     }
                 });
@@ -222,15 +210,17 @@ public class ProgramTesterUI extends JFrame
                 mainPanel.add(testFileNames);
                 mainPanel.add(testFilesButton);
 
-                previousButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    theProgramTesterCntl.step(0);
+                previousButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        theProgramTesterCntl.step(0);
+                    }
                 });
 
-                nextButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    //TODO CHANGE WHEN NEW STEPS COME IN
-                    theProgramTesterCntl.step(3);
+                nextButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        //TODO CHANGE WHEN NEW STEPS COME IN
+                        theProgramTesterCntl.step(3);
+                    }
                 });
 
                 break;
@@ -267,48 +257,42 @@ public class ProgramTesterUI extends JFrame
                 box2.setBounds(350, 250, 150, 25);
                 mainPanel.add(box2);
 
-                previousButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    theProgramTesterCntl.step(1);
+                previousButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        theProgramTesterCntl.step(1);
+                    }
                 });
 
-                nextButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    // Create runs from user input
-                    String fileName1 = fileNameField1.getText();
-                    String fileName2 = fileNameField2.getText();
-                    String run1 = (String) box1.getSelectedItem();
-                    int runs1 = Integer.parseInt(run1);
-                    String run2 = (String) box2.getSelectedItem();
-                    int runs2 = Integer.parseInt(run2);
+                nextButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        // Create runs from user input
+                        String fileName1 = fileNameField1.getText();
+                        String fileName2 = fileNameField2.getText();
+                        String run1 = (String) box1.getSelectedItem();
+                        int runs1 = Integer.parseInt(run1);
+                        String run2 = (String) box2.getSelectedItem();
+                        int runs2 = Integer.parseInt(run2);
 
-                    // Create/add runs for the first file
-                    if (!fileName1.equals(""))
-                    {
-                        for (int i = 0; i < runs1; i++)
-                        {
-                            Run r = new Run(fileName1);
+                        // Create/add runs for the first file
+                        if (!fileName1.equals("")) {
+                            for (int i = 0; i < runs1; i++) {
+                                Run r = new Run(fileName1);
+                            }
+                        } else {
+                            System.out.println("File name 1 empty");
                         }
-                    } 
-                    else
-                    {
-                        System.out.println("File name 1 empty");
-                    }
 
-                    // Create/add runs for the second file (if applicable)
-                    if (!fileName2.equals(""))
-                    {
-                        for (int i = 0; i < runs2; i++)
-                        {
-                            Run r = new Run(fileName2);
+                        // Create/add runs for the second file (if applicable)
+                        if (!fileName2.equals("")) {
+                            for (int i = 0; i < runs2; i++) {
+                                Run r = new Run(fileName2);
+                            }
+                        } else {
+                            System.out.println("File name 2 empty");
                         }
-                    } 
-                    else
-                    {
-                        System.out.println("File name 2 empty");
+                        // Move on to the next step
+                        theProgramTesterCntl.step(4);
                     }
-                    // Move on to the next step
-                    theProgramTesterCntl.step(4);
                 });
                 break;
             // </editor-fold>   
@@ -340,31 +324,27 @@ public class ProgramTesterUI extends JFrame
                 noScannerRadioButton.setText("None");
                 mainPanel.add(noScannerRadioButton);
 
-                previousButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    theProgramTesterCntl.step(3);
+                previousButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        theProgramTesterCntl.step(3);
+                    }
                 });
 
-                nextButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setCmdArgs(cmdArgsField.getText());
-                    if (noScannerRadioButton.isSelected())
-                    {
-                        Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setScannerArgs("None");
-                    } else
-                    {
-                        Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setScannerArgs(scannerInputField.getText());
-                    }
-
-                    if (this.theProgramTesterCntl.getCurrentViewModel().getRunNumber() + 1 < Run.getRunList().size())
-                    {
-                        this.theProgramTesterCntl.getCurrentViewModel().setRunNumber(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber() + 1);
-                        theProgramTesterCntl.step(4);
-
-                    } else
-                    {
-                        this.theProgramTesterCntl.getCurrentViewModel().printFiles();
-                        theProgramTesterCntl.step(5);
+                nextButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        Run.getRunList().get(ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setCmdArgs(cmdArgsField.getText());
+                        if (noScannerRadioButton.isSelected()) {
+                            Run.getRunList().get(ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setScannerArgs("None");
+                        } else {
+                            Run.getRunList().get(ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).setScannerArgs(scannerInputField.getText());
+                        }
+                        if (ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getRunNumber() + 1 < Run.getRunList().size()) {
+                            ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().setRunNumber(ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getRunNumber() + 1);
+                            theProgramTesterCntl.step(4);
+                        } else {
+                            ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().printFiles();
+                            theProgramTesterCntl.step(5);
+                        }
                     }
                 });
                 break;
@@ -373,19 +353,15 @@ public class ProgramTesterUI extends JFrame
             case 5:
 
                 browseButton = new JButton("Browse");
-                browseButton.addActionListener(new java.awt.event.ActionListener()
-                {
-                    public void actionPerformed(java.awt.event.ActionEvent evt)
-                    {
+                browseButton.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
                         browseButtonActionPerformed(evt);
                     }
                 });
 
                 fileLocationTestField = new JTextField();
-                fileLocationTestField.addActionListener(new java.awt.event.ActionListener()
-                {
-                    public void actionPerformed(java.awt.event.ActionEvent evt)
-                    {
+                fileLocationTestField.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
                         fileLocationTestFieldActionPerformed(evt);
                     }
                 });
@@ -394,10 +370,8 @@ public class ProgramTesterUI extends JFrame
                 jLabel1.setText("Choose an output location:");
 
                 outputNameField = new JTextField();
-                outputNameField.addActionListener(new java.awt.event.ActionListener()
-                {
-                    public void actionPerformed(java.awt.event.ActionEvent evt)
-                    {
+                outputNameField.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
                         outputNameFieldActionPerformed(evt);
                     }
                 });
@@ -415,9 +389,10 @@ public class ProgramTesterUI extends JFrame
                 jMenu2.setText("Edit");
                 jMenuBar1.add(jMenu2);
 
-                previousButton.addActionListener((java.awt.event.ActionEvent evt) ->
-                {
-                    theProgramTesterCntl.step(4);
+                previousButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        theProgramTesterCntl.step(4);
+                    }
                 });
 
                 //setJMenuBar(jMenuBar1);
@@ -430,41 +405,33 @@ public class ProgramTesterUI extends JFrame
     }
 
     // <editor-fold defaultstate="collapsed" desc="Step 1 ActionListeners">
-    private void unzippedFilesButtonActionPerformed(java.awt.event.ActionEvent evt)
-    {
+    private void unzippedFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = unzippedFiles.showOpenDialog(ProgramTesterUI.this.mainPanel);
-        if (returnVal == JFileChooser.APPROVE_OPTION)
-        {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().setSelectedUnzippedFiles(unzippedFiles.getSelectedFiles());
             String filelist = "";
-            for (int i = 0; i < ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles().length; i++)
-            {
+            for (int i = 0; i < ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles().length; i++) {
                 filelist += ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles()[i].getName() + ", ";
             }
             ProgramTesterUI.this.unzippedFileNames.setText(filelist);
         }
     }
 
-    private void zippedFilesButtonActionPerformed(java.awt.event.ActionEvent evt)
-    {
+    private void zippedFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = zippedFiles.showOpenDialog(ProgramTesterUI.this.mainPanel);
-        if (returnVal == JFileChooser.APPROVE_OPTION)
-        {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().setSelectedZippedFiles(zippedFiles.getSelectedFiles());
             String filelist = "";
-            for (int i = 0; i < ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles().length; i++)
-            {
+            for (int i = 0; i < ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles().length; i++) {
                 filelist += ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles()[i].getName() + ", ";
             }
             ProgramTesterUI.this.zippedFileNames.setText(filelist);
         }
     }
 
-    private void testFilesButtonActionPerformed(java.awt.event.ActionEvent evt)
-    {
+    private void testFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = testFiles.showOpenDialog(ProgramTesterUI.this.mainPanel);
-        if (returnVal == JFileChooser.APPROVE_OPTION)
-        {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().setSelectedTestFiles(testFiles.getSelectedFiles());
         }
     }
@@ -473,8 +440,7 @@ public class ProgramTesterUI extends JFrame
     // <editor-fold defaultstate="collapsed" desc="Step 2 ActionListeners">
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 3 ActionListeners">
-    private void buildRuns()
-    {
+    private void buildRuns() {
         //runList = new ArrayList();
         String fileName1 = fileNameField1.getText();
         String fileName2 = fileNameField2.getText();
@@ -482,26 +448,20 @@ public class ProgramTesterUI extends JFrame
         int runs2 = (int) box2.getSelectedItem();
 
         // Create/add runs for the first file
-        if (!fileName1.equals(""))
-        {
-            for (int i = 0; i < runs1; i++)
-            {
+        if (!fileName1.equals("")) {
+            for (int i = 0; i < runs1; i++) {
                 Run r = new Run(fileName1);
             }
-        } else
-        {
+        } else {
             System.out.println("File name 1 empty");
         }
 
         // Create/add runs for the second file (if applicable)
-        if (!fileName2.equals(""))
-        {
-            for (int i = 0; i < runs2; i++)
-            {
+        if (!fileName2.equals("")) {
+            for (int i = 0; i < runs2; i++) {
                 Run r = new Run(fileName2);
             }
-        } else
-        {
+        } else {
             System.out.println("File name 2 empty");
         }
     }
@@ -510,13 +470,11 @@ public class ProgramTesterUI extends JFrame
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 5 ActionListeners">
-    private void fileLocationTestFieldActionPerformed(java.awt.event.ActionEvent evt)
-    {//GEN-FIRST:event_fileLocationTestFieldActionPerformed
+    private void fileLocationTestFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileLocationTestFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fileLocationTestFieldActionPerformed
 
-    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt)
-    {//GEN-FIRST:event_browseButtonActionPerformed
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         // TODO add your handling code here:
         chooser = new JFileChooser();
         chooser.setCurrentDirectory(new java.io.File("."));
@@ -525,21 +483,18 @@ public class ProgramTesterUI extends JFrame
         // disable the "All files" option.
         chooser.setAcceptAllFileFilterUsed(false);
 
-        if (chooser.showOpenDialog(mainPanel) == JFileChooser.APPROVE_OPTION)
-        {
+        if (chooser.showOpenDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
             System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
             System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
             outputPath = chooser.getSelectedFile().toString();
             this.fileLocationTestField.setText(outputPath);
 
-        } else
-        {
+        } else {
             System.out.println("No Selection ");
         }
     }//GEN-LAST:event_browseButtonActionPerformed
 
-    private void outputNameFieldActionPerformed(java.awt.event.ActionEvent evt)
-    {//GEN-FIRST:event_outputNameFieldActionPerformed
+    private void outputNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputNameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_outputNameFieldActionPerformed
 
@@ -548,8 +503,7 @@ public class ProgramTesterUI extends JFrame
      * the name of the new file and hands it to the controller.
      * The next GUI is then also instantiated. 
      */
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt)
-    {//GEN-FIRST:event_nextButtonActionPerformed
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         this.theOutputPathChooserController.setOutputPath(outputPath);
         outputName = outputNameField.getText();
         this.theOutputPathChooserController.setFileName(outputName);
