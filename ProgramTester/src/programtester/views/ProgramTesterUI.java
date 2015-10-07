@@ -9,6 +9,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -138,7 +141,7 @@ public class ProgramTesterUI extends JFrame {
             case 0:
                 this.setTitle("Program Tester");
                 mainPanel.setLayout(new GridLayout(1, 1, 60, 60));
-                introLabel = new JLabel("Welcome to the ProgramTester Wizard!  Press Next to continue...");
+                introLabel = new JLabel("        Welcome to the ProgramTester Wizard!  Press Next to continue...");
                 mainPanel.add(introLabel);
 
                 nextButton.addActionListener(new ActionListener() {
@@ -163,7 +166,9 @@ public class ProgramTesterUI extends JFrame {
                         unzippedFileNames.append(this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles()[i].getName() + ", ");
                     }
                 }
-                unzippedFiles = new JFileChooser();
+                else
+                    unzippedFileNames.setText("Unzipped Files");
+                unzippedFiles = new JFileChooser("./");
                 unzippedFiles.setMultiSelectionEnabled(true);
                 unzippedFilesButton = new JButton("Select...");
 
@@ -176,11 +181,18 @@ public class ProgramTesterUI extends JFrame {
                 mainPanel.add(unzippedFileNames);
                 mainPanel.add(unzippedFilesButton);
 
-                zippedFileNames = new JTextArea("Zipped Files");
+                zippedFileNames = new JTextArea();
                 zippedFileNames.setEditable(false);
                 zippedFileNames.setPreferredSize(new Dimension(2, 20));
                 zippedFileNames.setLineWrap(true);
-                zippedFiles = new JFileChooser();
+                if (this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles() != null) {
+                    for (int i = 0; i < this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles().length; i++) {
+                        zippedFileNames.append(this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles()[i].getName() + ", ");
+                    }
+                }
+                else
+                    zippedFileNames.setText("Zipped Files");
+                zippedFiles = new JFileChooser("./");
                 zippedFiles.setMultiSelectionEnabled(true);
                 zippedFilesButton = new JButton("Select...");
 
@@ -197,7 +209,7 @@ public class ProgramTesterUI extends JFrame {
                 testFileNames.setEditable(false);
                 testFileNames.setPreferredSize(new Dimension(2, 20));
                 testFileNames.setLineWrap(true);
-                testFiles = new JFileChooser();
+                testFiles = new JFileChooser("./");
                 testFiles.setMultiSelectionEnabled(true);
                 testFilesButton = new JButton("Select...");
 
@@ -218,7 +230,10 @@ public class ProgramTesterUI extends JFrame {
 
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        //TODO CHANGE WHEN NEW STEPS COME IN
+                        if(ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles() != null){
+                            ProgramTesterUI.this.theProgramTesterCntl.createConfigBatchFile();
+                            //ProgramTesterUI.this.theProgramTesterCntl.moveAndUnzipFiles();
+                        }
                         theProgramTesterCntl.step(3);
                     }
                 });
@@ -343,6 +358,7 @@ public class ProgramTesterUI extends JFrame {
                             theProgramTesterCntl.step(4);
                         } else {
                             ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().printFiles();
+                            theProgramTesterCntl.runTests();
                             theProgramTesterCntl.step(5);
                         }
                     }
