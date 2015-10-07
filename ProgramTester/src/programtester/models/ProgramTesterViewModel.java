@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import programtester.controllers.OutputPathChooserController;
 import programtester.controllers.ProgramTesterCntl;
-import programtester.models.Run;
 
 /**
  *
@@ -25,9 +24,11 @@ public class ProgramTesterViewModel{
     private File[] selectedUnzippedFiles;
     //private File filesDir = new File("src/files-dir/");
     private File[] selectedZippedFiles;
-    //private File filesZip = new File("src/files-zip/");
+    //private File filesZipFolder = new File("src/files-zip/");
     private File[] selectedTestFiles;
     //private File filesTest = new File("src/files-test/");
+    private File configBatchFile = new File("configBatch.txt");
+    private File srcOutputFolder = new File("/src-output/");
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Step 2: Flag master folder">
     // </editor-fold>
@@ -76,6 +77,7 @@ public class ProgramTesterViewModel{
         this.theProgramTesterCntl = parentProgramTesterCntl;
     }
     
+    // <editor-fold defaultstate="collapsed" desc="Step 1 accessors/mutators">
     public File[] getSelectedUnzippedFiles(){
         return this.selectedUnzippedFiles;
     }
@@ -96,4 +98,17 @@ public class ProgramTesterViewModel{
     public void setSelectedTestFiles(File[] theFiles){
         this.selectedTestFiles = theFiles;
     }
+    
+    public File getConfigBatchFile(){
+        return this.configBatchFile;
+    }
+    public void setConfigBatchFile(File theFile){
+        this.configBatchFile = theFile;
+    }
+    
+    public File getSrcOutputFolder(){
+        return this.srcOutputFolder;
+    }
+    // </editor-fold>
+    
 }
