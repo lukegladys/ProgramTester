@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -165,9 +166,9 @@ public class ProgramTesterUI extends JFrame {
                     for (int i = 0; i < this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles().length; i++) {
                         unzippedFileNames.append(this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles()[i].getName() + ", ");
                     }
-                }
-                else
+                } else {
                     unzippedFileNames.setText("Unzipped Files");
+                }
                 unzippedFiles = new JFileChooser("./");
                 unzippedFiles.setMultiSelectionEnabled(true);
                 unzippedFilesButton = new JButton("Select...");
@@ -189,9 +190,9 @@ public class ProgramTesterUI extends JFrame {
                     for (int i = 0; i < this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles().length; i++) {
                         zippedFileNames.append(this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles()[i].getName() + ", ");
                     }
-                }
-                else
+                } else {
                     zippedFileNames.setText("Zipped Files");
+                }
                 zippedFiles = new JFileChooser("./");
                 zippedFiles.setMultiSelectionEnabled(true);
                 zippedFilesButton = new JButton("Select...");
@@ -230,7 +231,7 @@ public class ProgramTesterUI extends JFrame {
 
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        if(ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles() != null){
+                        if (ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles() != null) {
                             ProgramTesterUI.this.theProgramTesterCntl.createConfigBatchFile();
                             //ProgramTesterUI.this.theProgramTesterCntl.moveAndUnzipFiles();
                         }
@@ -294,7 +295,10 @@ public class ProgramTesterUI extends JFrame {
                                 Run r = new Run(fileName1);
                             }
                         } else {
-                            System.out.println("File name 1 empty");
+                            JOptionPane.showMessageDialog(new JFrame(),
+                                    "File name 1 empty",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
 
                         // Create/add runs for the second file (if applicable)
@@ -303,10 +307,15 @@ public class ProgramTesterUI extends JFrame {
                                 Run r = new Run(fileName2);
                             }
                         } else {
-                            System.out.println("File name 2 empty");
+                            JOptionPane.showMessageDialog(new JFrame(),
+                                    "File name 2 empty",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
-                        // Move on to the next step
-                        theProgramTesterCntl.step(4);
+
+                        if (!fileName1.equals("") && !fileName2.equals("")) {
+                            theProgramTesterCntl.step(4);
+                        }
                     }
                 });
                 break;
@@ -330,9 +339,11 @@ public class ProgramTesterUI extends JFrame {
                 mainPanel.add(scnrInput);
 
                 cmdArgsField.setBounds(250, 125, 200, 20);
+                cmdArgsField.setText("");
                 mainPanel.add(cmdArgsField);
 
                 scannerInputField.setBounds(200, 150, 250, 20);
+                scannerInputField.setText("");
                 mainPanel.add(scannerInputField);
 
                 noScannerRadioButton.setBounds(200, 175, 100, 30);
