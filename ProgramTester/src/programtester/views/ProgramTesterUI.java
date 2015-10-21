@@ -233,7 +233,7 @@ public class ProgramTesterUI extends JFrame {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         if (ProgramTesterUI.this.theProgramTesterCntl.getCurrentViewModel().getSelectedZippedFiles() != null) {
                             ProgramTesterUI.this.theProgramTesterCntl.createConfigBatchFile();
-                            //ProgramTesterUI.this.theProgramTesterCntl.moveAndUnzipFiles();
+                            ProgramTesterUI.this.theProgramTesterCntl.moveAndUnzipFiles();
                         }
                         theProgramTesterCntl.step(3);
                     }

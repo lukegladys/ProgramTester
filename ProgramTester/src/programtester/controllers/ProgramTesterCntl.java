@@ -6,17 +6,15 @@
 package programtester.controllers;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import programtester.models.ProgramTesterViewModel;
 import programtester.views.ProgramTesterUI;
+import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.core.ZipFile;
 
 /**
  *
@@ -64,35 +62,41 @@ public class ProgramTesterCntl {
         }
     }
 
-    /*public void moveAndUnzipFiles() throws FileNotFoundException, IOException {
-     byte[] buffer = new byte[1024];
-     ZipInputStream zis;
-     for (File f : this.currentViewModel.getSelectedZippedFiles()) {
-     zis = new ZipInputStream(new FileInputStream(f));
-     ZipEntry ze = zis.getNextEntry();
-            
-     while(ze!=null){
-     String fileName = ze.getName();
-     File newFile = new File(this.currentViewModel.getSrcOutputFolder() + File.separator + fileName);
-                
-     new File(newFile.getParent()).mkdirs();
-                
-     FileOutputStream fos = new FileOutputStream(newFile);
-                
-     int len;
-     while((len = zis.read(buffer))>0){
-     fos.write(buffer, 0, len);
-     }
-                
-     fos.close();
-     zis.closeEntry();
-     ze = zis.getNextEntry();
-     }
-            
-     zis.close();
-     }
+    public void deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    deleteFolder(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+        folder.delete();
+    }
 
-     }*/
+    public void moveAndUnzipFiles() {
+        deleteFolder(this.currentViewModel.getSrcOutputFolder());
+        ArrayList<String> source = new ArrayList();
+        String destination = this.currentViewModel.getSrcOutputFolder().toString();
+        ZipFile zipFile;
+
+        for (File f : this.currentViewModel.getSelectedZippedFiles()) {
+            source.add(f.getPath());
+        }
+
+        for (String s : source) {
+            try {
+                zipFile = new ZipFile(s);
+                zipFile.extractAll(destination);
+            } catch (ZipException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     public void runTests() {
         String[] args = {};
         programtester.BatchTester.main(args);

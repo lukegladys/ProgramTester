@@ -52,7 +52,7 @@ public class BatchTester
 
 //      set paths and file names:
         String classPath = "bin/" + className + studentName;
-        String studentPath = sourcePath + "/" + studentName;
+        String studentPath = sourcePath + "/242-1-test1-" + studentName;
         String inputFileStub = studentPath + "/input";
         String outputFileName = studentPath + "/output-" + studentName + ".txt";
 /*      make sure set correctly
