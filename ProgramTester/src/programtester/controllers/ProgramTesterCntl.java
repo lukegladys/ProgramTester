@@ -12,18 +12,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import programtester.models.ProgramTesterViewModel;
-import programtester.views.ProgramTesterUI;
-import net.lingala.zip4j.exception.ZipException;
-import net.lingala.zip4j.core.ZipFile;
+import programtester.views.*;
 
-/**
- *
- * @author Luke
- */
 public class ProgramTesterCntl {
 
-    ProgramTesterViewModel currentViewModel;
-    ProgramTesterUI theProgramTesterUI;
+    private ProgramTesterViewModel currentViewModel;
+    private ProgramTesterUI theProgramTesterUI;
 
     public ProgramTesterCntl() {
         this.startProgramTesterWizard();
@@ -38,6 +32,22 @@ public class ProgramTesterCntl {
     public ProgramTesterViewModel getCurrentViewModel() {
         return currentViewModel;
     }
+    
+    public StepOnePanel getStepOnePanel(){
+        return this.theProgramTesterUI.stepOnePanel;
+    }
+    
+    public StepTwoPanel getStepTwoPanel(){
+        return this.theProgramTesterUI.stepTwoPanel;
+    }
+    
+    public StepThreePanel getStepThreePanel(){
+        return this.theProgramTesterUI.stepThreePanel;
+    }
+    
+//    public StepFourPanel getStepFourPanel(){
+//        return this.stepFourPanel;
+//    }
 
     public void step(int stepNumber) {
         theProgramTesterUI.renderComponents(stepNumber);
@@ -60,41 +70,6 @@ public class ProgramTesterCntl {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ProgramTesterViewModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void deleteFolder(File folder) {
-        File[] files = folder.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.isDirectory()) {
-                    deleteFolder(f);
-                } else {
-                    f.delete();
-                }
-            }
-        }
-        folder.delete();
-    }
-
-    public void moveAndUnzipFiles() {
-        deleteFolder(this.currentViewModel.getSrcOutputFolder());
-        ArrayList<String> source = new ArrayList();
-        String destination = this.currentViewModel.getSrcOutputFolder().toString();
-        ZipFile zipFile;
-
-        for (File f : this.currentViewModel.getSelectedZippedFiles()) {
-            source.add(f.getPath());
-        }
-
-        for (String s : source) {
-            try {
-                zipFile = new ZipFile(s);
-                zipFile.extractAll(destination);
-            } catch (ZipException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 
     public void runTests() {
