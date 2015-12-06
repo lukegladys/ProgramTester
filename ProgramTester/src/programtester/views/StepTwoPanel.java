@@ -21,7 +21,7 @@ import programtester.models.Run;
  */
 public class StepTwoPanel extends JPanel {
 
-    private ProgramTesterCntl theProgramTesterCntl;
+    //private ProgramTesterCntl theProgramTesterCntl; // NEVER GETS SET?
 
     private JTextField fileNameField1;
     private JTextField fileNameField2;
@@ -57,7 +57,8 @@ public class StepTwoPanel extends JPanel {
         this.add(box2);
     }
 
-    public void CreateRuns() {
+    // Changed to boolean – theProgramTesterCntl is never set, so you get a null pointer exception trying to call the next step from this class
+    public boolean CreateRuns() {
         String fileName1 = fileNameField1.getText();
         String fileName2 = fileNameField2.getText();
         String run1 = (String) box1.getSelectedItem();
@@ -89,8 +90,7 @@ public class StepTwoPanel extends JPanel {
                     JOptionPane.ERROR_MESSAGE);
         }
 
-        if (!fileName1.equals("") && !fileName2.equals("")) {
-            theProgramTesterCntl.step(4);
-        }
+        // Changed if -> call step(4) to return true/false if it validated/failed
+        return !fileName1.equals("") && !fileName2.equals("");
     }
 }

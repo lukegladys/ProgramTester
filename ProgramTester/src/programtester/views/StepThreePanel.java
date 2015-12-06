@@ -22,7 +22,6 @@ public class StepThreePanel extends JPanel {
 
     private ProgramTesterCntl theProgramTesterCntl;
 
-    private JButton submitButton;
     private JLabel fileNameLabel = new JLabel();
     private JLabel runNumberLabel = new JLabel();
     private JTextField cmdArgsField = new JTextField();
@@ -72,11 +71,11 @@ public class StepThreePanel extends JPanel {
         }
         if (this.theProgramTesterCntl.getCurrentViewModel().getRunNumber() + 1 < Run.getRunList().size()) {
             this.theProgramTesterCntl.getCurrentViewModel().setRunNumber(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber() + 1);
-            theProgramTesterCntl.step(4);
+            theProgramTesterCntl.step(3);
         } else {
             this.theProgramTesterCntl.getCurrentViewModel().printFiles();
-            theProgramTesterCntl.runTests();
-            theProgramTesterCntl.step(5);
+            //theProgramTesterCntl.runTests(); // still need to configure outputs before running the tests
+            theProgramTesterCntl.step(4);
         }
     }
 }

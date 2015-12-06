@@ -16,18 +16,18 @@ public class BatchTester
     String configFileName = "configBatch.txt";
 //  System.out.println("configFileName: " + configFileName);
     
-    String path = "bin/jdk1.7.0_71/bin";
+    String path = "bin/jdk1.7.0_71/bin"; // path to JDK
 //  set fixed paths and file names:
     String sourcePath = "src-output";
     String argsFileName = "args.txt";
     String testInputFileName = "TestInput.txt";
-/*  make sure set correctly
-    System.out.println("path: " + path);
+//  make sure set correctly
+    /*System.out.println("path: " + path);
     System.out.println("sourcePath: " + sourcePath);
-    System.out.println("testDataPath: " + testDataPath);
+    //System.out.println("testDataPath: " + testDataPath);
     System.out.println("argsFileName: " + argsFileName);
-    System.out.println("testInputFileName: " + testInputFileName);
-*/
+    System.out.println("testInputFileName: " + testInputFileName);*/
+
     try
     {
 //    config file has list of ordinal student number,

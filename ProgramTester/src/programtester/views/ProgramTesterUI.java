@@ -8,6 +8,13 @@ package programtester.views;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -19,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import programtester.TrivialEdit;
 import programtester.controllers.OutputPathChooserController;
 import programtester.controllers.ProgramTesterCntl;
 import programtester.models.Run;
@@ -50,6 +58,7 @@ public class ProgramTesterUI extends JFrame {
     private JLabel jLabel1;
     private JTextField outputNameField;
     private JLabel jLabel2;
+    private JLabel jLabel3;
     private JMenuBar jMenuBar1;
     private JMenu jMenu1;
     private JMenu jMenu2;
@@ -88,7 +97,7 @@ public class ProgramTesterUI extends JFrame {
         
         stepOnePanel = new StepOnePanel(this.theProgramTesterCntl);
         stepTwoPanel = new StepTwoPanel(this.theProgramTesterCntl);
-        stepThreePanel = new StepThreePanel(this.theProgramTesterCntl);
+        //stepThreePanel = new StepThreePanel(this.theProgramTesterCntl);
         //stepFourPanel = new StepFourPanel(this);
 
         this.setSize(650, 500);
@@ -109,11 +118,22 @@ public class ProgramTesterUI extends JFrame {
 
         switch (stepInWizard) {
             case 0:
+                // Remove old elements
+                mainPanel.removeAll();
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                // Set title
                 this.setTitle("Program Tester");
+                
+                // Paint new elements
                 mainPanel.setLayout(new GridLayout(1, 1, 60, 60));
-                introLabel = new JLabel("       Welcome to the ProgramTester Wizard!  Press Next to continue...");
+                introLabel = new JLabel("   Welcome to the ProgramTester Wizard!  Press Next to continue...");
                 mainPanel.add(introLabel);
+                mainPanel.revalidate();
+                mainPanel.repaint();
 
+                previousButton.setEnabled(false);
                 nextButton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,14 +142,28 @@ public class ProgramTesterUI extends JFrame {
                 });
                 break;
             case 1:
-                mainPanel = this.theProgramTesterCntl.getStepOnePanel();
-                this.setTitle("Choose Files");
+                // Remove old elements
+                mainPanel.removeAll();
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                // Set title
+                this.setTitle("Choose Files/Folders");
+                
+                // Paint new elements
+                mainPanel.add(this.theProgramTesterCntl.getStepOnePanel());
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                // Update button actions
+                previousButton.setEnabled(true);
                 previousButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        theProgramTesterCntl.step(1);
+                        theProgramTesterCntl.step(0);
                     }
                 });
-
+                
+                nextButton.setEnabled(true);
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         theProgramTesterCntl.step(2);
@@ -137,38 +171,173 @@ public class ProgramTesterUI extends JFrame {
                 });
                 break;
             case 2:
-                mainPanel = this.theProgramTesterCntl.getStepTwoPanel();
-                this.setTitle("Run parameters");
+                // Remove old elements
+                mainPanel.removeAll();
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                // Set title
+                this.setTitle("Set Run Parameters");
+                
+                // Paint new elements
+                mainPanel.add(this.theProgramTesterCntl.getStepTwoPanel());
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                previousButton.setEnabled(true);
                 previousButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         theProgramTesterCntl.step(1);
                     }
                 });
 
+                nextButton.setEnabled(true);
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        ProgramTesterUI.this.theProgramTesterCntl.getStepTwoPanel().CreateRuns();
+                        boolean validateRunCreation = ProgramTesterUI.this.theProgramTesterCntl.getStepTwoPanel().CreateRuns();
+                        if(validateRunCreation) {
+                            theProgramTesterCntl.step(3);
+                        }
                     }
                 });
                 break;
             case 3:
+                // Remove old elements
+                mainPanel.removeAll();
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                // Set title
+                this.setTitle("Set Arguments");
+                
+                // Create stepThreePanel
+                stepThreePanel = new StepThreePanel(this.theProgramTesterCntl);
+                
+                // Paint new elements
+                mainPanel.add(this.theProgramTesterCntl.getStepThreePanel());
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                previousButton.setEnabled(true);
+                previousButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        theProgramTesterCntl.step(2);
+                    }
+                });
 
+                nextButton.setEnabled(true);
+                nextButton.setText("Next");
+                nextButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        ProgramTesterUI.this.theProgramTesterCntl.getStepThreePanel().DoRuns();
+                    }
+                });
+                break;
+            // <editor-fold defaultstate="collapsed" desc="Step 4: Specify scanner and cmd inputs">
+            case 4:
+                // Remove old elements
+                mainPanel.removeAll();
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                
+                // Set title
+                this.setTitle("Set Output Parameters");
+                
+                // Paint new elements
+                mainPanel.setLayout(null);
+                
+                browseButton = new JButton("Browse");
+                browseButton.setBounds(515, 30, 100, 20);
+                browseButton.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        browseButtonActionPerformed(evt);
+                    }
+                });
+                mainPanel.add(browseButton);
+
+                fileLocationTestField = new JTextField();
+                fileLocationTestField.setEditable(false);
+                fileLocationTestField.setBounds(230, 30, 275, 20);
+                fileLocationTestField.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        fileLocationTestFieldActionPerformed(evt);
+                    }
+                });
+                mainPanel.add(fileLocationTestField);
+
+                jLabel1 = new JLabel();
+                jLabel1.setBounds(30, 30, 180, 20);
+                jLabel1.setText("Choose an output folder:");
+                mainPanel.add(jLabel1);
+
+                outputNameField = new JTextField();
+                outputNameField.setBounds(230, 60, 275, 20);
+                outputNameField.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        outputNameFieldActionPerformed(evt);
+                    }
+                });
+                mainPanel.add(outputNameField);
+
+                jLabel2 = new JLabel();
+                jLabel2.setBounds(30, 60, 180, 20);
+                jLabel2.setText("Choose an output file name:");
+                mainPanel.add(jLabel2);
+                
+                jLabel3 = new JLabel();
+                jLabel3.setBounds(505, 60, 50, 20);
+                jLabel3.setText(".txt");
+                mainPanel.add(jLabel3);
+                
+                previousButton.setEnabled(false);
                 previousButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         theProgramTesterCntl.step(3);
                     }
                 });
 
+                nextButton.setEnabled(true);
+                nextButton.setText("Submit");
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        ProgramTesterUI.this.theProgramTesterCntl.getStepThreePanel().DoRuns();
-                        theProgramTesterCntl.step(4);
+                        // Set variables with user input
+                        String outputPath = fileLocationTestField.getText();
+                        String outputFilename = outputNameField.getText();
+                        
+                        // Set stdout to file for batch output
+                        PrintStream original = new PrintStream(System.out);
+                        File outputFile = new File(outputPath + "/" + outputFilename + ".txt");
+                        System.out.println(outputFile.getAbsolutePath());
+                        if(!outputFile.exists() && !outputFile.isDirectory()) {
+                            try {
+                                outputFile.createNewFile();
+                            } catch (IOException ex) {
+                                Logger.getLogger(ProgramTesterUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        try {
+                            System.out.println("Outputting to file...please wait.");
+                            System.setOut(new PrintStream(outputFile));
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(ProgramTesterUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        theProgramTesterCntl.runTests(outputPath, outputFilename);
+                        
+                        nextButton.setEnabled(false);
+                        nextButton.setText("Tests Completed");
+                        
+                        System.setOut(original);
+                        
+                        // Display results
+                        System.out.println("Tests complete. Displaying results.");
+                        TrivialEdit resultsDisplay = new TrivialEdit("output-batch.txt");
+                        String [] editArgs = {outputFile.getAbsolutePath()};
+                        TrivialEdit.main(editArgs);
+                        System.out.println("Results displayed.");
+
                     }
                 });
-                break;
-            // <editor-fold defaultstate="collapsed" desc="Step 4: Specify scanner and cmd inputs">
-            case 4:
-
                 break;
             // </editor-fold>
             // <editor-fold defaultstate="collapsed" desc="Step 5: Specify output folder and output file name. Specify whether student name or student handle should be used in the output file">    
@@ -201,7 +370,7 @@ public class ProgramTesterUI extends JFrame {
                 jLabel2 = new JLabel();
                 jLabel2.setText("Choose an output file name:");
 
-                jMenuBar1 = new JMenuBar();
+                /*jMenuBar1 = new JMenuBar();
 
                 jMenu1 = new JMenu();
                 jMenu1.setText("File");
@@ -209,13 +378,16 @@ public class ProgramTesterUI extends JFrame {
 
                 jMenu2 = new JMenu();
                 jMenu2.setText("Edit");
-                jMenuBar1.add(jMenu2);
+                jMenuBar1.add(jMenu2);*/
 
                 previousButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         theProgramTesterCntl.step(4);
                     }
                 });
+                
+                nextButton.setEnabled(false);
+                nextButton.setText("Next");
 
                 //setJMenuBar(jMenuBar1);
                 //TODO SET PANEL LAYOUTS HERE*************************************

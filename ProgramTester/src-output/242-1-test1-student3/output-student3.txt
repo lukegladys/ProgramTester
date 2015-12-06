@@ -1,48 +1,48 @@
-.\src-output\242-1-test1-student3\ArraySearcher.java:8: error: ']' expected
+./src-output/242-1-test1-student3/ArraySearcher.java:8: error: ']' expected
 		int a[0] = Integer.parseInt(args[3]);
 		      ^
-.\src-output\242-1-test1-student3\ArraySearcher.java:8: error: illegal start of expression
+./src-output/242-1-test1-student3/ArraySearcher.java:8: error: illegal start of expression
 		int a[0] = Integer.parseInt(args[3]);
 		       ^
-.\src-output\242-1-test1-student3\ArraySearcher.java:9: error: ']' expected
+./src-output/242-1-test1-student3/ArraySearcher.java:9: error: ']' expected
 		int a[1] = Integer.parseInt(args[4]);
 		      ^
-.\src-output\242-1-test1-student3\ArraySearcher.java:9: error: illegal start of expression
+./src-output/242-1-test1-student3/ArraySearcher.java:9: error: illegal start of expression
 		int a[1] = Integer.parseInt(args[4]);
 		       ^
-.\src-output\242-1-test1-student3\ArraySearcher.java:10: error: ']' expected
+./src-output/242-1-test1-student3/ArraySearcher.java:10: error: ']' expected
 		int a[2] = Integer.parseInt(args[5]);
 		      ^
-.\src-output\242-1-test1-student3\ArraySearcher.java:10: error: illegal start of expression
+./src-output/242-1-test1-student3/ArraySearcher.java:10: error: illegal start of expression
 		int a[2] = Integer.parseInt(args[5]);
 		       ^
-.\src-output\242-1-test1-student3\ArraySearcher.java:11: error: ']' expected
+./src-output/242-1-test1-student3/ArraySearcher.java:11: error: ']' expected
 		int a[3] = Integer.parseInt(args[6]);
 		      ^
-.\src-output\242-1-test1-student3\ArraySearcher.java:11: error: illegal start of expression
+./src-output/242-1-test1-student3/ArraySearcher.java:11: error: illegal start of expression
 		int a[3] = Integer.parseInt(args[6]);
 		       ^
 8 errors
-.\src-output\242-1-test1-student3\TestProgram.java:6: error: cannot find symbol
+./src-output/242-1-test1-student3/TestProgram.java:6: error: cannot find symbol
 		ArraySearcher program = new ArraySearcher();
 		^
   symbol:   class ArraySearcher
   location: class TestProgram
-.\src-output\242-1-test1-student3\TestProgram.java:6: error: cannot find symbol
+./src-output/242-1-test1-student3/TestProgram.java:6: error: cannot find symbol
 		ArraySearcher program = new ArraySearcher();
 		                            ^
   symbol:   class ArraySearcher
   location: class TestProgram
-.\src-output\242-1-test1-student3\TestProgram.java:17: error: cannot find symbol
+./src-output/242-1-test1-student3/TestProgram.java:17: error: cannot find symbol
 		ArraySearcher program = new ArraySearcher();
 		^
   symbol:   class ArraySearcher
   location: class TestProgram
-.\src-output\242-1-test1-student3\TestProgram.java:17: error: cannot find symbol
+./src-output/242-1-test1-student3/TestProgram.java:17: error: cannot find symbol
 		ArraySearcher program = new ArraySearcher();
 		                            ^
   symbol:   class ArraySearcher
   location: class TestProgram
 4 errors
-Error: Could not find or load main class Factorial
-Error: Could not find or load main class ArraySearcher
+Error: Could not find or load main class test
+Error: Could not find or load main class test1193i4

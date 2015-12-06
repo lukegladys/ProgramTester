@@ -45,6 +45,10 @@ public class ProgramTesterCntl {
         return this.theProgramTesterUI.stepThreePanel;
     }
     
+    public StepFourPanel getStepFourPanel(){
+        return this.theProgramTesterUI.stepFourPanel;
+    }
+    
 //    public StepFourPanel getStepFourPanel(){
 //        return this.stepFourPanel;
 //    }
@@ -72,8 +76,8 @@ public class ProgramTesterCntl {
         }
     }
 
-    public void runTests() {
-        String[] args = {};
+    public void runTests(String outputPath, String outputFilename) {
+        String[] args = {outputPath, outputFilename};
         programtester.BatchTester.main(args);
     }
 
