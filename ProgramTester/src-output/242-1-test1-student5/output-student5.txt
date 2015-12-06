@@ -1,2 +1,2 @@
-Error: Could not find or load main class test
-Error: Could not find or load main class test1193i4
+Error: Could not find or load main class 1
+Error: Could not find or load main class 2

@@ -331,7 +331,7 @@ public class ProgramTesterUI extends JFrame {
                         
                         // Display results
                         System.out.println("Tests complete. Displaying results.");
-                        TrivialEdit resultsDisplay = new TrivialEdit("output-batch.txt");
+                        TrivialEdit resultsDisplay = new TrivialEdit();
                         String [] editArgs = {outputFile.getAbsolutePath()};
                         TrivialEdit.main(editArgs);
                         System.out.println("Results displayed.");

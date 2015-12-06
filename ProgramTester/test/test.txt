@@ -1,0 +1,106 @@
+run #: 1 ; Name: mudgettdr
+Output goes to: src-output/242-1-test1-mudgettdr/output-mudgettdr.txt
+source path: src-output
+source absolute path: /Users/Barclay/Programming/ProgramTester/ProgramTester/src-output
+Compiling: ArraySearcher.java
+Compiling: Factorial.java
+Compiling: TestProgram.java
+Compiled Successfully
+[java, 1]
+System.in inputs: [None]
+java process arguments: [java, 1]
+[java, 2]
+System.in inputs: [None]
+java process arguments: [java, 2]
+
+run #: 2 ; Name: student1
+Output goes to: src-output/242-1-test1-student1/output-student1.txt
+source path: src-output
+source absolute path: /Users/Barclay/Programming/ProgramTester/ProgramTester/src-output
+Compiling: ArraySearcher.java
+Compiling: Factorial.java
+Compiling: TestProgram.java
+Compiled Successfully
+[java, 1]
+System.in inputs: [None]
+java process arguments: [java, 1]
+[java, 2]
+System.in inputs: [None]
+java process arguments: [java, 2]
+
+run #: 3 ; Name: student2
+Output goes to: src-output/242-1-test1-student2/output-student2.txt
+source path: src-output
+source absolute path: /Users/Barclay/Programming/ProgramTester/ProgramTester/src-output
+Compiling: 242-1-test1-student2.java
+Compiling: ArraySearcher.java
+Compiling: Factorial.java
+Compiling: TestProgram.java
+Compile Exception
+[java, 1]
+System.in inputs: [None]
+java process arguments: [java, 1]
+[java, 2]
+System.in inputs: [None]
+java process arguments: [java, 2]
+
+run #: 4 ; Name: student3
+Output goes to: src-output/242-1-test1-student3/output-student3.txt
+source path: src-output
+source absolute path: /Users/Barclay/Programming/ProgramTester/ProgramTester/src-output
+Compiling: ArraySearcher.java
+Compiling: Factorial.java
+Compiling: TestProgram.java
+Compile Exception
+[java, 1]
+System.in inputs: [None]
+java process arguments: [java, 1]
+[java, 2]
+System.in inputs: [None]
+java process arguments: [java, 2]
+
+run #: 5 ; Name: student4
+Output goes to: src-output/242-1-test1-student4/output-student4.txt
+source path: src-output
+source absolute path: /Users/Barclay/Programming/ProgramTester/ProgramTester/src-output
+Compiling: ArraySearcher.java
+Compiling: Factorial.java
+Compiling: TestProgram.java
+Compiled Successfully
+[java, 1]
+System.in inputs: [None]
+java process arguments: [java, 1]
+[java, 2]
+System.in inputs: [None]
+java process arguments: [java, 2]
+
+run #: 6 ; Name: student5
+Output goes to: src-output/242-1-test1-student5/output-student5.txt
+source path: src-output
+source absolute path: /Users/Barclay/Programming/ProgramTester/ProgramTester/src-output
+Compiling: ArraySearcher.java
+Compiling: Factorial.java
+Compiling: TestProgram.java
+Compiled Successfully
+[java, 1]
+System.in inputs: [None]
+java process arguments: [java, 1]
+[java, 2]
+System.in inputs: [None]
+java process arguments: [java, 2]
+
+run #: 7 ; Name: student6
+Output goes to: src-output/242-1-test1-student6/output-student6.txt
+source path: src-output
+source absolute path: /Users/Barclay/Programming/ProgramTester/ProgramTester/src-output
+Compiling: ArraySearcher.java
+Compiling: Factorial.java
+Compiling: TestProgram.java
+Compiled Successfully
+[java, 1]
+System.in inputs: [None]
+java process arguments: [java, 1]
+[java, 2]
+System.in inputs: [None]
+java process arguments: [java, 2]
+
