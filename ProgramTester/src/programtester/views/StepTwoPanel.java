@@ -56,6 +56,18 @@ public class StepTwoPanel extends JPanel {
         box2.setBounds(350, 250, 150, 25);
         this.add(box2);
     }
+    public JTextField getFileNameField1(){
+        return fileNameField1;
+    }
+    public JTextField getFileNameField2(){
+        return fileNameField2;
+    }
+    public JComboBox getBox1(){
+        return box1;
+    }
+    public JComboBox getBox2(){
+        return box2;
+    }
 
     // Changed to boolean – theProgramTesterCntl is never set, so you get a null pointer exception trying to call the next step from this class
     public boolean CreateRuns() {
