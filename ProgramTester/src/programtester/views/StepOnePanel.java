@@ -17,7 +17,6 @@ import programtester.controllers.*;
 public class StepOnePanel extends JPanel {
 
     private ProgramTesterCntl theProgramTesterCntl;
-
     private JTextArea sourceFolderNameArea;
     private JFileChooser sourceFolderFileChooser;
     private JButton sourceFolderButton;
@@ -65,6 +64,7 @@ public class StepOnePanel extends JPanel {
             }
             this.sourceFolderNameArea.setText(filelist);
             theProgramTesterCntl.createConfigBatchFile();
+            theProgramTesterCntl.retrievePossibleTestFiles();
         }
     }
 // </editor-fold>

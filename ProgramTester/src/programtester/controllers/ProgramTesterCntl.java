@@ -7,6 +7,7 @@ package programtester.controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ public class ProgramTesterCntl {
 
     private ProgramTesterViewModel currentViewModel;
     private ProgramTesterUI theProgramTesterUI;
+    private FilenameFilter textFilter;
 
     public ProgramTesterCntl() {
         this.startProgramTesterWizard();
@@ -76,6 +78,37 @@ public class ProgramTesterCntl {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ProgramTesterViewModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void setFileNameFilter(){
+        //FilenameFilter based on work from avajava
+        textFilter = new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                String lowercaseName = name.toLowerCase();
+                if (lowercaseName.endsWith(".java")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+    }
+    
+    public ArrayList<String> retrievePossibleTestFiles(){
+        ArrayList<String> possibleTestFiles = new ArrayList<String>();
+        setFileNameFilter();        
+        for (File f : this.currentViewModel.getSelectedUnzippedFiles()) {
+            String[] files = f.list(textFilter);
+            for (String file : files) {
+                if (!possibleTestFiles.contains(file)) {
+                    possibleTestFiles.add(file);
+                }
+            }    
+        }
+        for (int i = 0; i<possibleTestFiles.size(); i++){
+            System.out.println(possibleTestFiles.get(i));
+        }
+        return possibleTestFiles;
     }
 
     public void runTests(String outputPath, String outputFilename) {
