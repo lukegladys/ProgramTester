@@ -21,12 +21,8 @@ public class ProgramTesterViewModel{
     private ProgramTesterCntl theProgramTesterCntl;
     
     // <editor-fold defaultstate="collapsed" desc="Step 1: Set files-dir, files-zip and files-test folder locations">
-    private File[] selectedUnzippedFiles;
+    private File[] studentFolders;
     //private File filesDir = new File("src/files-dir/");
-    private File[] selectedZippedFiles;
-    //private File filesZipFolder = new File("src/files-zip/");
-    private File[] selectedTestFiles;
-    //private File filesTest = new File("src/files-test/");
     private File configBatchFile = new File("configBatch.txt");
     private File srcOutputFolder = new File("/src-output/");
     // </editor-fold>
@@ -79,25 +75,12 @@ public class ProgramTesterViewModel{
     
     // <editor-fold defaultstate="collapsed" desc="Step 1 accessors/mutators">
     public File[] getSelectedUnzippedFiles(){
-        return this.selectedUnzippedFiles;
+        return this.studentFolders;
     }
-    public void setSelectedUnzippedFiles(File[] theFiles){
-        this.selectedUnzippedFiles = theFiles;
-    }
-    
-    public File[] getSelectedZippedFiles(){
-        return this.selectedZippedFiles;
-    }
-    public void setSelectedZippedFiles(File[] theFiles){
-        this.selectedZippedFiles = theFiles;
+    public void setSelectedUnzippedFiles(File theFiles){
+        this.studentFolders = theFiles.listFiles();
     }
     
-    public File[] getSelectedTestFiles(){
-        return this.selectedTestFiles;
-    }
-    public void setSelectedTestFiles(File[] theFiles){
-        this.selectedTestFiles = theFiles;
-    }
     
     public File getConfigBatchFile(){
         return this.configBatchFile;

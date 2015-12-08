@@ -58,15 +58,17 @@ public class ProgramTesterCntl {
     }
 
     public void createConfigBatchFile() {
+        System.out.println("Create config batch file.");
         int testHandle = 111111;
         try {
             PrintWriter writer = new PrintWriter(this.currentViewModel.getConfigBatchFile());
             writer.print("");
 
             String temp;
-            for (File f : this.currentViewModel.getSelectedZippedFiles()) {
-                temp = f.getName().split("test1-")[1];
-                writer.println(temp.split(".zip")[0] + "\t" + testHandle);
+            for (File f : this.currentViewModel.getSelectedUnzippedFiles()) {
+                //System.out.println(f.toString() + "---" + f.getName());
+                temp = f.getName();
+                writer.println(temp + "\t" + testHandle);
                 testHandle += 111111;
             }
 
