@@ -37,7 +37,7 @@ public class StepThreePanel extends JPanel {
         fileNameLabel.setBounds(30, 30, 100, 20);
         fileNameLabel.setText(Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).getFileName());
         this.add(fileNameLabel);
-
+        
         JLabel cmdArgs = new JLabel();
         cmdArgs.setBounds(100, 125, 150, 20);
         cmdArgs.setText("Command-Line Args: ");

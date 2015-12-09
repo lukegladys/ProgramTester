@@ -20,6 +20,7 @@ public class ProgramTesterCntl {
     private ProgramTesterViewModel currentViewModel;
     private ProgramTesterUI theProgramTesterUI;
     private FilenameFilter textFilter;
+    private ArrayList<String> possibleTestFiles = new ArrayList<String>();
 
     public ProgramTesterCntl() {
         this.startProgramTesterWizard();
@@ -95,7 +96,6 @@ public class ProgramTesterCntl {
     }
     
     public ArrayList<String> retrievePossibleTestFiles(){
-        ArrayList<String> possibleTestFiles = new ArrayList<String>();
         setFileNameFilter();        
         for (File f : this.currentViewModel.getSelectedUnzippedFiles()) {
             String[] files = f.list(textFilter);
@@ -108,6 +108,10 @@ public class ProgramTesterCntl {
         for (int i = 0; i<possibleTestFiles.size(); i++){
             System.out.println(possibleTestFiles.get(i));
         }
+        return possibleTestFiles;
+    }
+    
+    public ArrayList<String> getPossibleTestFiles(){
         return possibleTestFiles;
     }
 

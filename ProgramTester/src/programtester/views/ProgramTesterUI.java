@@ -96,7 +96,7 @@ public class ProgramTesterUI extends JFrame {
         this.renderComponents(0);
         
         stepOnePanel = new StepOnePanel(this.theProgramTesterCntl);
-        stepTwoPanel = new StepTwoPanel(this.theProgramTesterCntl);
+        //stepTwoPanel = new StepTwoPanel(this.theProgramTesterCntl);
         //stepThreePanel = new StepThreePanel(this.theProgramTesterCntl);
         //stepFourPanel = new StepFourPanel(this);
 
@@ -178,6 +178,9 @@ public class ProgramTesterUI extends JFrame {
                 
                 // Set title
                 this.setTitle("Set Run Parameters");
+                
+                //Generate panel:
+                stepTwoPanel = new StepTwoPanel(this.theProgramTesterCntl);
                 
                 // Paint new elements
                 mainPanel.add(this.theProgramTesterCntl.getStepTwoPanel());

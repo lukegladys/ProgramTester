@@ -49,10 +49,10 @@ public class StepTwoPanelTest {
     
     @Before
     public void setUp() {
-        theStepTwoPanel.getFileNameField1().setText(sampleText1);
-        theStepTwoPanel.getFileNameField2().setText(sampleText2);
-        theStepTwoPanel.getBox1().setSelectedIndex(selectedIndex1);
-        theStepTwoPanel.getBox2().setSelectedIndex(selectedIndex2);
+//        theStepTwoPanel.getFileNameField1().setText(sampleText1);
+//        theStepTwoPanel.getFileNameField2().setText(sampleText2);
+//        theStepTwoPanel.getBox1().setSelectedIndex(selectedIndex1);
+//        theStepTwoPanel.getBox2().setSelectedIndex(selectedIndex2);
     }
     
     @After
