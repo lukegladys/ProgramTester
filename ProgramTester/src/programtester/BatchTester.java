@@ -16,7 +16,7 @@ public class BatchTester
     String configFileName = "configBatch.txt";
 //  System.out.println("configFileName: " + configFileName);
     
-    String path = "bin/jdk1.7.0_71/bin"; // path to JDK
+    String path = "C:/java/jdk1.7.0_71/bin"; // path to JDK
 //  set fixed paths and file names:
     String sourcePath = "src-output";
     String argsFileName = "args.txt";
