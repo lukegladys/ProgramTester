@@ -44,7 +44,10 @@ public class StepTwoPanel extends JPanel {
         }
 
     }
-   
+    
+    public ArrayList<JSpinner> getSpinnerList(){
+        return spinnerList;
+    }
 
     // Changed to boolean – theProgramTesterCntl is never set, so you get a null pointer exception trying to call the next step from this class
     public boolean CreateRuns() {
@@ -54,7 +57,7 @@ public class StepTwoPanel extends JPanel {
                 for(int j = 0; j<tempInt; j++){
                     String tempString = theProgramTesterCntl.getPossibleTestFiles().get(i);
                     tempString = tempString.replace(".java", "");
-                    System.out.println(tempString);
+                    //System.out.println(tempString);
                     Run r = new Run(tempString);
                 }
             }

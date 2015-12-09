@@ -26,12 +26,10 @@ public class StepTwoPanelTest {
     
     public static String sampleText1 = "sampletext1";
     public static String sampleText2 = "sampletext2";
-    public static int selectedIndex1 = 0;
-    //index 0 corresponds to int 1
-    public static int selectedIndex2 = 4;
-    //index 4 corresponds to int 5
+    public static int selectedIndex1 = 1;
+    public static int selectedIndex2 = 5;
     ProgramTesterCntl theProgramTesterCntl = new ProgramTesterCntl();
-    StepTwoPanel theStepTwoPanel = new StepTwoPanel (theProgramTesterCntl);
+    StepTwoPanel theStepTwoPanel;
     
     public StepTwoPanelTest() {
     }
@@ -49,6 +47,15 @@ public class StepTwoPanelTest {
     
     @Before
     public void setUp() {
+        ArrayList<String> testArr = new ArrayList<String>();
+        testArr.add(sampleText1);
+        testArr.add(sampleText2);
+        theProgramTesterCntl.setPossibleTestFiles(testArr);
+        
+        theStepTwoPanel = new StepTwoPanel (theProgramTesterCntl);
+        
+        theStepTwoPanel.getSpinnerList().get(0).setValue(selectedIndex1);
+        theStepTwoPanel.getSpinnerList().get(1).setValue(selectedIndex2);
 //        theStepTwoPanel.getFileNameField1().setText(sampleText1);
 //        theStepTwoPanel.getFileNameField2().setText(sampleText2);
 //        theStepTwoPanel.getBox1().setSelectedIndex(selectedIndex1);

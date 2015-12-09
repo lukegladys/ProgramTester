@@ -114,6 +114,10 @@ public class ProgramTesterCntl {
     public ArrayList<String> getPossibleTestFiles(){
         return possibleTestFiles;
     }
+    
+    public void setPossibleTestFiles(ArrayList<String> possibleFiles){
+        possibleTestFiles = possibleFiles;
+    }
 
     public void runTests(String outputPath, String outputFilename) {
         String[] args = {outputPath, outputFilename};
