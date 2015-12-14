@@ -33,30 +33,38 @@ public class StepThreePanel extends JPanel {
         this.theProgramTesterCntl = parentProgramTesterCntl;
 
         this.setLayout(null);
+        
+        
+        String instructions = "For each run of each file, input desired scanner "
+                + "and command line arguments. If you do not want a scanner "
+                + "input, simply click the \"none\" radio button.";
+        LabelArea instructionLabel = new LabelArea(instructions);
+        instructionLabel.setBounds(100, 30, 400, 100);
+        this.add(instructionLabel);
 
-        fileNameLabel.setBounds(30, 30, 100, 20);
+        fileNameLabel.setBounds(30, 130, 100, 20);
         fileNameLabel.setText(Run.getRunList().get(this.theProgramTesterCntl.getCurrentViewModel().getRunNumber()).getFileName());
         this.add(fileNameLabel);
-        
+                
         JLabel cmdArgs = new JLabel();
-        cmdArgs.setBounds(100, 125, 150, 20);
+        cmdArgs.setBounds(100, 225, 150, 20);
         cmdArgs.setText("Command-Line Args: ");
         this.add(cmdArgs);
 
         JLabel scnrInput = new JLabel();
-        scnrInput.setBounds(100, 150, 150, 20);
+        scnrInput.setBounds(100, 250, 150, 20);
         scnrInput.setText("Scanner Input: ");
         this.add(scnrInput);
 
-        cmdArgsField.setBounds(250, 125, 200, 20);
+        cmdArgsField.setBounds(250, 225, 200, 20);
         cmdArgsField.setText("");
         this.add(cmdArgsField);
 
-        scannerInputField.setBounds(200, 150, 250, 20);
+        scannerInputField.setBounds(200, 250, 250, 20);
         scannerInputField.setText("");
         this.add(scannerInputField);
 
-        noScannerRadioButton.setBounds(200, 175, 100, 30);
+        noScannerRadioButton.setBounds(200, 275, 100, 30);
         noScannerRadioButton.setText("None");
         this.add(noScannerRadioButton);
 

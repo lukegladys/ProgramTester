@@ -128,7 +128,12 @@ public class ProgramTesterUI extends JFrame {
                 
                 // Paint new elements
                 mainPanel.setLayout(new GridLayout(1, 1, 60, 60));
-                introLabel = new JLabel("   Welcome to the ProgramTester Wizard!  Press Next to continue...");
+                
+                String introText = "Welcome to the ProgramTester wizard. "
+                        + "This wizard will allow you to compile and run "
+                        + "a series of programs at the same time in order to "
+                        + "test them faster. Click the next button to continue.";
+                LabelArea introLabel = new LabelArea(introText);
                 mainPanel.add(introLabel);
                 mainPanel.revalidate();
                 mainPanel.repaint();
@@ -249,8 +254,16 @@ public class ProgramTesterUI extends JFrame {
                 // Paint new elements
                 mainPanel.setLayout(null);
                 
+                String instructions = "Choose a directory in which to save "
+                        + "output files using the file chooser below. Then "
+                        + "pick a name for your output file by typing in the "
+                        + "text field.";
+                LabelArea instructionLabel = new LabelArea(instructions);
+                instructionLabel.setBounds(100, 30, 400, 100);
+                mainPanel.add(instructionLabel);
+                
                 browseButton = new JButton("Browse");
-                browseButton.setBounds(515, 30, 100, 20);
+                browseButton.setBounds(515, 130, 100, 20);
                 browseButton.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         browseButtonActionPerformed(evt);
@@ -260,7 +273,7 @@ public class ProgramTesterUI extends JFrame {
 
                 fileLocationTestField = new JTextField();
                 fileLocationTestField.setEditable(false);
-                fileLocationTestField.setBounds(230, 30, 275, 20);
+                fileLocationTestField.setBounds(230, 130, 275, 20);
                 fileLocationTestField.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         fileLocationTestFieldActionPerformed(evt);
@@ -269,12 +282,12 @@ public class ProgramTesterUI extends JFrame {
                 mainPanel.add(fileLocationTestField);
 
                 jLabel1 = new JLabel();
-                jLabel1.setBounds(30, 30, 180, 20);
+                jLabel1.setBounds(30, 130, 180, 20);
                 jLabel1.setText("Choose an output folder:");
                 mainPanel.add(jLabel1);
 
                 outputNameField = new JTextField();
-                outputNameField.setBounds(230, 60, 275, 20);
+                outputNameField.setBounds(230, 160, 275, 20);
                 outputNameField.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         outputNameFieldActionPerformed(evt);
@@ -283,12 +296,12 @@ public class ProgramTesterUI extends JFrame {
                 mainPanel.add(outputNameField);
 
                 jLabel2 = new JLabel();
-                jLabel2.setBounds(30, 60, 180, 20);
+                jLabel2.setBounds(30, 160, 180, 20);
                 jLabel2.setText("Choose an output file name:");
                 mainPanel.add(jLabel2);
                 
                 jLabel3 = new JLabel();
-                jLabel3.setBounds(505, 60, 50, 20);
+                jLabel3.setBounds(505, 160, 50, 20);
                 jLabel3.setText(".txt");
                 mainPanel.add(jLabel3);
                 

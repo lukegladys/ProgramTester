@@ -10,7 +10,9 @@ import java.awt.GridLayout;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import programtester.controllers.*;
 
@@ -25,23 +27,40 @@ public class StepOnePanel extends JPanel {
 
         this.theProgramTesterCntl = parentProgramTesterCntl;
 
-        this.setLayout(new GridLayout(4, 2, 60, 60));
-
+        this.setLayout(null);
+        
+        String instructions = "First, select the lowest-level folder containing "
+                + "a single folder for each student's work. Once you select a "
+                + "directory, the names of the students inside will appear "
+                + "within the textarea below.";
+        LabelArea instructionLabel = new LabelArea(instructions);
+        instructionLabel.setBounds(100, 30, 400, 100);
+        this.add(instructionLabel);
+        
+        JLabel selectLabel = new JLabel ("Select folder:");
+        selectLabel.setBounds(100, 130, 180, 20);
+        this.add(selectLabel);
+        
+        JLabel studentLabel = new JLabel ("Students' Names:");
+        studentLabel.setBounds(100, 160, 180, 20);
+        this.add(studentLabel);
+        
         sourceFolderNameArea = new JTextArea();
+        sourceFolderNameArea.setBounds(300, 160, 250, 200);
         sourceFolderNameArea.setEditable(false);
-        sourceFolderNameArea.setPreferredSize(new Dimension(2, 20));
         sourceFolderNameArea.setLineWrap(true);
         if (this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles() != null) {
             for (File selectedUnzippedFile : this.theProgramTesterCntl.getCurrentViewModel().getSelectedUnzippedFiles()) {
                 sourceFolderNameArea.append(selectedUnzippedFile.getName() + ", ");
             }
         } else {
-            sourceFolderNameArea.setText("Click the button to the right in order to select your source folder.");
+            sourceFolderNameArea.setText("Click the select button in order to select your source folder.");
         }
         sourceFolderFileChooser = new JFileChooser("./");
         sourceFolderFileChooser.setMultiSelectionEnabled(false);
         sourceFolderFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         sourceFolderButton = new JButton("Select...");
+        sourceFolderButton.setBounds(300, 130, 100, 20);
 
         sourceFolderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

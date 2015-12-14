@@ -5,6 +5,7 @@
  */
 package programtester.views;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -32,16 +33,28 @@ public class StepTwoPanel extends JPanel {
 
     public StepTwoPanel(ProgramTesterCntl parentProgramTesterCntl) {
         this.theProgramTesterCntl = parentProgramTesterCntl;
-        GridLayout experimentLayout = new GridLayout(0,2);
-        this.setLayout(experimentLayout);
-        this.add(new JLabel("File Name"));
-        this.add(new JLabel("Runs"));
+        this.setLayout(new BorderLayout());
+        
+        String instructions = "The program has looked through each student's "
+                + "folder and aggregated a list of all .java file names in "
+                + "the students' folders. For each file name, use the spinner "
+                + "to select the number of runs for each file. If you don't "
+                + "want to run a file, leave the spinner at \"0\".";
+        LabelArea instructionsLabel = new LabelArea(instructions);
+        this.add(instructionsLabel, BorderLayout.NORTH);
+        
+        JPanel innerPanel = new JPanel();
+        innerPanel.setLayout(new GridLayout(0,2));
+        innerPanel.add(new JLabel("File Name"));
+        innerPanel.add(new JLabel("Runs"));
         for(int i = 0; i<theProgramTesterCntl.getPossibleTestFiles().size(); i++){
-            this.add(new JLabel(theProgramTesterCntl.getPossibleTestFiles().get(i)));
+            innerPanel.add(new JLabel(theProgramTesterCntl.getPossibleTestFiles().get(i)));
             JSpinner j = new JSpinner();
-            this.add(j);
+            innerPanel.add(j);
             spinnerList.add(j);
         }
+        
+        this.add(innerPanel, BorderLayout.CENTER);
 
     }
     
