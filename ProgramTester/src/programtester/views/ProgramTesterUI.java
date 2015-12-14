@@ -202,6 +202,11 @@ public class ProgramTesterUI extends JFrame {
                 nextButton.setEnabled(true);
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        if(Run.getRunList()!=null){
+                            for(int i = Run.getRunList().size(); i>0; i--){
+                                Run.getRunList().remove(i-1);
+                            }
+                        }
                         boolean validateRunCreation = ProgramTesterUI.this.theProgramTesterCntl.getStepTwoPanel().CreateRuns();
                         if(validateRunCreation) {
                             theProgramTesterCntl.step(3);
@@ -305,10 +310,10 @@ public class ProgramTesterUI extends JFrame {
                 jLabel3.setText(".txt");
                 mainPanel.add(jLabel3);
                 
-                previousButton.setEnabled(false);
+                previousButton.setEnabled(true);
                 previousButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        theProgramTesterCntl.step(3);
+                        theProgramTesterCntl.step(1);
                     }
                 });
 
@@ -316,6 +321,8 @@ public class ProgramTesterUI extends JFrame {
                 nextButton.setText("Submit");
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        
+                        nextButton.setText("Tests in progress");
                         // Set variables with user input
                         String outputPath = fileLocationTestField.getText();
                         String outputFilename = outputNameField.getText();
@@ -341,11 +348,12 @@ public class ProgramTesterUI extends JFrame {
                         theProgramTesterCntl.runTests(outputPath, outputFilename);
                         
                         nextButton.setEnabled(false);
-                        nextButton.setText("Tests Completed");
+                        nextButton.setText("Tests complete.");
                         
                         System.setOut(original);
                         
                         // Display results
+                        JOptionPane.showMessageDialog(null, "Tests complete. Displaying Results.");
                         System.out.println("Tests complete. Displaying results.");
                         TrivialEdit resultsDisplay = new TrivialEdit();
                         String [] editArgs = {outputFile.getAbsolutePath()};
